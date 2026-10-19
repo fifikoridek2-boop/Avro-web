@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl" data-theme="dark">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Avro Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Avro Documentation · دليل توثيق Avro</title>
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 768 768'%3E%3Cg transform='translate(-34 -17)'%3E%3Cpath d='M201.8 589.6L402.6 202.1L634.5 600.6' fill='none' stroke='%23000' stroke-width='144.01' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 768 768'%3E%3Cg transform='translate(-34 -17)'%3E%3Cpath d='M201.8 589.6L402.6 202.1L634.5 600.6' fill='none' stroke='%23fff' stroke-width='144.01' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,8 +15,9 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css" id="hljs-theme" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" id="hljsTheme" />
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/highlight.min.js"></script>
+
     <style>
       :root {
         --ink: #0d0d0d;
@@ -25,38 +26,82 @@
         --border: #e2e2e2;
         --muted: #666666;
         --accent: #000000;
-        --accent-light: #f0f0f0;
-        --sidebar-w: 280px;
-        --header-h: 70px;
-        --radius: 12px;
+        --accent-light: #eaeaea;
+        --sidebar-w: 270px;
+        --header-h: 68px;
+        --radius: 10px;
         --font-main: "Outfit", system-ui, sans-serif;
         --font-mono: "JetBrains Mono", monospace;
       }
 
       [data-theme="dark"] {
-        --ink: #ededed;
+        --ink: #f0f0f0;
         --surface: #0a0a0a;
         --surface-sub: #141414;
-        --border: #262626;
-        --muted: #999999;
+        --border: #222222;
+        --muted: #888888;
         --accent: #ffffff;
-        --accent-light: #1f1f1f;
+        --accent-light: #1c1c1c;
       }
 
       html[dir="rtl"] {
         --font-main: "Noto Sans Arabic", "Outfit", system-ui, sans-serif;
       }
 
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      ::selection {
+        background: #333333;
+        color: #ffffff;
+      }
+      [data-theme="light"] ::selection {
+        background: #171717;
+        color: #ffffff;
+      }
+
+      /* Custom Monochrome Scrollbars */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(140, 140, 140, 0.24);
+        border-radius: 999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(140, 140, 140, 0.45);
+      }
+      [data-theme="dark"] ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.16);
+      }
+      [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.32);
+      }
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(140, 140, 140, 0.24) transparent;
+      }
+      [data-theme="dark"] * {
+        scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+      }
+
       body {
         font-family: var(--font-main);
         background: var(--surface);
         color: var(--ink);
-        line-height: 1.6;
+        line-height: 1.65;
         -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
       }
 
-      /* Header */
+      /* Header Bar */
       header {
         position: sticky;
         top: 0;
@@ -68,45 +113,155 @@
         align-items: center;
         justify-content: space-between;
         padding: 0 24px;
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
       }
-      .brand-box {
-        display: flex;
+
+      .header-start {
+        display: inline-flex;
         align-items: center;
         gap: 12px;
+      }
+
+      .brand-box {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
         text-decoration: none;
         color: var(--ink);
-        font-weight: 600;
-        font-size: 19px;
+        flex-shrink: 0;
       }
+
       .brand-logo {
-        height: 26px;
+        height: 22px;
         width: auto;
+        display: block;
         fill: currentColor;
       }
-      .header-actions {
-        display: flex;
+
+      .docs-tag {
+        display: inline-flex;
         align-items: center;
-        gap: 14px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 6px;
+        background: var(--surface-sub);
+        color: var(--muted);
+        border: 1px solid var(--border);
+        line-height: 1;
       }
-      .lang-select, .theme-btn, .nav-link-btn {
+
+      .header-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Custom Modern Dropdown Pill */
+      .select-wrapper {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .lang-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: var(--surface-sub);
+        border: 1px solid var(--border);
+        color: var(--ink);
+        padding: 7px 32px 7px 14px;
+        border-radius: 999px;
+        font-family: inherit;
+        font-size: 13.5px;
+        font-weight: 500;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.2s;
+      }
+      html[dir="rtl"] .lang-select {
+        padding: 7px 14px 7px 32px;
+      }
+      .lang-select:hover, .lang-select:focus {
+        border-color: var(--muted);
+      }
+      .lang-select option {
+        background: var(--surface);
+        color: var(--ink);
+      }
+
+      .select-chevron {
+        position: absolute;
+        right: 12px;
+        pointer-events: none;
+        width: 12px;
+        height: 12px;
+        color: var(--muted);
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      html[dir="rtl"] .select-chevron {
+        right: auto;
+        left: 12px;
+      }
+
+      .icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--surface-sub);
+        border: 1px solid var(--border);
+        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+      .icon-btn:hover {
+        background: var(--accent-light);
+        border-color: var(--muted);
+      }
+
+      .github-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
         background: var(--surface-sub);
         border: 1px solid var(--border);
         color: var(--ink);
         padding: 7px 14px;
         border-radius: 999px;
-        font-family: inherit;
-        font-size: 14px;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
+        font-size: 13.5px;
+        font-weight: 500;
         text-decoration: none;
         transition: all 0.2s;
+        flex-shrink: 0;
       }
-      .lang-select:hover, .theme-btn:hover, .nav-link-btn:hover {
+      .github-btn:hover {
         background: var(--accent-light);
-        border-color: var(--ink);
+        border-color: var(--muted);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--ink);
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 6px;
+      }
+      .menu-toggle:hover {
+        background: var(--surface-sub);
       }
 
       /* Layout */
@@ -124,7 +279,7 @@
         position: sticky;
         top: var(--header-h);
         height: calc(100vh - var(--header-h));
-        padding: 20px 14px;
+        padding: 20px 14px 40px;
         flex-shrink: 0;
       }
       html[dir="rtl"] aside {
@@ -133,7 +288,7 @@
       }
 
       .search-box {
-        margin-bottom: 20px;
+        margin-bottom: 18px;
       }
       .search-input {
         width: 100%;
@@ -145,9 +300,10 @@
         font-family: inherit;
         font-size: 13.5px;
         outline: none;
+        transition: border-color 0.2s;
       }
       .search-input:focus {
-        border-color: var(--ink);
+        border-color: var(--muted);
       }
 
       .nav-group-title {
@@ -156,106 +312,140 @@
         letter-spacing: 0.08em;
         color: var(--muted);
         font-weight: 700;
-        margin: 18px 8px 8px;
+        margin: 20px 8px 8px;
       }
       .nav-item {
         display: block;
         padding: 7px 12px;
-        border-radius: 8px;
+        border-radius: 6px;
         text-decoration: none;
         color: var(--muted);
-        font-size: 14px;
+        font-size: 13.5px;
         transition: all 0.15s ease;
         margin-bottom: 2px;
+        border-inline-start: 3px solid transparent;
       }
       .nav-item:hover {
         color: var(--ink);
         background: var(--surface-sub);
       }
       .nav-item.active {
-        color: var(--surface);
-        background: var(--ink);
-        font-weight: 500;
+        color: var(--ink);
+        background: var(--accent-light);
+        font-weight: 600;
+        border-inline-start-color: var(--ink);
       }
 
-      /* Content Area */
+      /* Main Article Content */
       main {
         flex: 1;
-        max-width: 900px;
+        max-width: 860px;
         margin: 0 auto;
-        padding: 40px 32px 80px;
+        padding: 44px 36px 90px;
       }
+
       .doc-content h1 {
-        font-size: 34px;
-        letter-spacing: -0.03em;
-        margin-bottom: 18px;
-        line-height: 1.2;
+        font-size: 36px;
+        letter-spacing: -0.035em;
+        margin-bottom: 20px;
+        line-height: 1.25;
+        font-weight: 700;
       }
       .doc-content h2 {
         font-size: 24px;
-        letter-spacing: -0.02em;
-        margin: 36px 0 14px;
-        padding-bottom: 8px;
+        letter-spacing: -0.025em;
+        margin: 40px 0 16px;
+        padding-bottom: 10px;
         border-bottom: 1px solid var(--border);
+        font-weight: 600;
       }
       .doc-content h3 {
         font-size: 19px;
-        margin: 26px 0 10px;
+        letter-spacing: -0.015em;
+        margin: 28px 0 12px;
+        font-weight: 600;
       }
       .doc-content p {
-        margin-bottom: 16px;
+        margin-bottom: 18px;
         font-size: 16px;
         color: var(--ink);
+        line-height: 1.75;
       }
+
+      /* Pure Monochrome Link Styling — NO BLUE! */
+      .doc-content a {
+        color: inherit;
+        font-weight: 500;
+        text-decoration: underline;
+        text-decoration-color: var(--muted);
+        text-underline-offset: 3.5px;
+        transition: all 0.2s ease;
+      }
+      .doc-content a:hover {
+        color: var(--ink);
+        text-decoration-color: var(--ink);
+        background: var(--surface-sub);
+        border-radius: 4px;
+      }
+
       .doc-content ul, .doc-content ol {
-        margin: 0 0 18px 24px;
+        margin: 0 0 20px 24px;
       }
       html[dir="rtl"] .doc-content ul, html[dir="rtl"] .doc-content ol {
-        margin: 0 24px 18px 0;
+        margin: 0 24px 20px 0;
       }
       .doc-content li {
-        margin-bottom: 6px;
+        margin-bottom: 8px;
+        line-height: 1.7;
       }
+
+      /* Monochrome Code Blocks */
       .doc-content pre {
-        background: var(--surface-sub);
+        background: var(--surface-sub) !important;
         border: 1px solid var(--border);
         border-radius: var(--radius);
-        padding: 16px;
+        padding: 16px 18px;
         overflow-x: auto;
-        margin: 20px 0;
+        margin: 22px 0;
         font-family: var(--font-mono);
-        font-size: 14px;
-        direction: ltr;
-        text-align: left;
+        font-size: 13.5px;
+        line-height: 1.65;
+        direction: ltr !important;
+        text-align: left !important;
       }
       .doc-content code:not(pre code) {
         background: var(--surface-sub);
         border: 1px solid var(--border);
-        padding: 2px 6px;
+        color: var(--ink);
+        padding: 2.5px 7px;
         border-radius: 6px;
         font-family: var(--font-mono);
-        font-size: 13.5px;
+        font-size: 13px;
       }
+
       .doc-content blockquote {
-        border-left: 3px solid var(--ink);
+        border-left: 3px solid var(--border);
         padding-left: 16px;
-        margin: 20px 0;
+        margin: 22px 0;
         color: var(--muted);
+        font-style: normal;
       }
       html[dir="rtl"] .doc-content blockquote {
         border-left: none;
-        border-right: 3px solid var(--ink);
+        border-right: 3px solid var(--border);
         padding-left: 0;
         padding-right: 16px;
       }
+
       .doc-content table {
         width: 100%;
         border-collapse: collapse;
-        margin: 20px 0;
+        margin: 24px 0;
+        font-size: 14.5px;
       }
       .doc-content th, .doc-content td {
         border: 1px solid var(--border);
-        padding: 10px 14px;
+        padding: 11px 15px;
         text-align: left;
       }
       html[dir="rtl"] .doc-content th, html[dir="rtl"] .doc-content td {
@@ -266,32 +456,68 @@
         font-weight: 600;
       }
 
-      /* Mobile Drawer */
-      .menu-toggle {
-        display: none;
-        background: none;
-        border: none;
-        color: var(--ink);
-        cursor: pointer;
-        padding: 6px;
-      }
+      /* Mobile Precision Overrides */
+      @media (max-width: 768px) {
+        header {
+          padding: 0 14px;
+          height: 60px;
+        }
+        .header-actions {
+          gap: 7px;
+        }
+        .github-btn span {
+          display: none;
+        }
+        .github-btn {
+          padding: 8px;
+          border-radius: 50%;
+          width: 34px;
+          height: 34px;
+          justify-content: center;
+        }
+        .icon-btn {
+          width: 34px;
+          height: 34px;
+        }
+        .lang-select {
+          font-size: 12px;
+          padding: 6px 24px 6px 10px;
+          max-width: 105px;
+          text-overflow: ellipsis;
+        }
+        html[dir="rtl"] .lang-select {
+          padding: 6px 10px 6px 24px;
+        }
+        .select-chevron {
+          right: 8px;
+        }
+        html[dir="rtl"] .select-chevron {
+          left: 8px;
+        }
+        .brand-logo {
+          height: 19px;
+        }
+        .docs-tag {
+          font-size: 10px;
+          padding: 2px 6px;
+        }
 
-      @media (max-width: 860px) {
         aside {
           position: fixed;
           left: -100%;
-          top: var(--header-h);
-          z-index: 90;
-          transition: left 0.25s ease;
-          width: 80%;
+          top: 60px;
+          z-index: 95;
+          transition: left 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+          width: 82%;
           max-width: 320px;
-          box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+          box-shadow: 4px 0 24px rgba(0,0,0,0.25);
+          height: calc(100vh - 60px);
         }
         html[dir="rtl"] aside {
           left: auto;
           right: -100%;
-          transition: right 0.25s ease;
-          box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+          transition: right 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+          box-shadow: -4px 0 24px rgba(0,0,0,0.25);
         }
         aside.open {
           left: 0;
@@ -300,7 +526,9 @@
           right: 0;
         }
         .menu-toggle {
-          display: block;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
         }
         main {
           padding: 24px 18px 60px;
@@ -310,11 +538,11 @@
   </head>
   <body>
     <header>
-      <div style="display: flex; align-items: center; gap: 12px;">
+      <div class="header-start">
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
-        <a href="/" class="brand-box">
+        <a href="/" class="brand-box" aria-label="Avro Documentation Home">
           <svg class="brand-logo" viewBox="70 70 1941 662">
             <path d="M264.50 312.13L338.68 168.99A72.01 72.01 0 0 1 464.85 165.90L696.74 564.41A72.01 72.01 0 0 1 572.26 636.84L406.26 351.57L392.36 378.39Z" />
             <path d="M245.43 348.93L137.90 556.43A72.01 72.00 0 0 0 265.76 622.69L373.29 415.19Z" />
@@ -322,26 +550,40 @@
             <path d="M1210.5 672.0V298.9H1327.2V672.0ZM1327.2 466.3 1277.3 429.4Q1291.9 362.6 1326.8 326.9Q1361.7 291.2 1422.4 291.2Q1450.0 291.2 1470.3 298.9Q1490.7 306.6 1506.0 324.2L1437.0 412.5Q1429.3 404.1 1417.8 399.8Q1406.2 395.6 1391.7 395.6Q1361.7 395.6 1344.4 413.3Q1327.2 430.9 1327.2 466.3Z" />
             <path d="M1729.9 680.4Q1671.1 680.4 1625.0 654.7Q1579.0 629.0 1552.1 584.3Q1525.2 539.5 1525.2 484.1Q1525.2 429.4 1552.1 385.6Q1579.0 341.9 1625.0 316.2Q1671.1 290.5 1730.2 290.5Q1787.3 290.5 1834.0 315.8Q1880.7 341.1 1907.6 385.3Q1934.4 429.4 1934.4 484.7Q1934.4 539.6 1907.6 583.9Q1880.7 628.2 1834.2 654.3Q1787.8 680.4 1729.9 680.4ZM1729.7 573.0Q1754.5 573.0 1773.9 561.8Q1793.2 550.7 1803.9 531.1Q1814.7 511.5 1814.7 485.1Q1814.7 459.2 1803.2 438.9Q1791.6 418.7 1773.0 407.9Q1754.5 397.2 1730.2 397.2Q1704.9 397.2 1686.1 408.3Q1667.3 419.4 1656.1 439.4Q1645.0 459.3 1645.0 484.8Q1645.0 510.8 1656.1 530.7Q1667.3 550.7 1686.1 561.8Q1704.9 573.0 1729.7 573.0Z" />
           </svg>
-          <span style="font-size: 16px; font-weight: 500; opacity: 0.7;">Docs</span>
+          <span class="docs-tag">Docs</span>
         </a>
       </div>
 
       <div class="header-actions">
-        <select id="langSelect" class="lang-select" aria-label="Select Language">
-          <option value="ar">العربية (Arabic)</option>
-          <option value="en">English</option>
-          <option value="zh">简体中文</option>
-          <option value="zh-Hant">繁體中文</option>
-        </select>
-        <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">◑</button>
-        <a href="https://github.com/fifikoridek2-boop/Avro" target="_blank" rel="noopener" class="nav-link-btn">GitHub ↗</a>
+        <div class="select-wrapper">
+          <select id="langSelect" class="lang-select" aria-label="Select Language">
+            <option value="ar">🇸🇦 العربية</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="zh">🇨🇳 简体中文</option>
+            <option value="zh-Hant">🇹🇼 繁體中文</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="https://github.com/fifikoridek2-boop/Avro" target="_blank" rel="noopener" class="github-btn" aria-label="Avro on GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
       </div>
     </header>
 
     <div class="layout-container">
       <aside id="sidebar">
         <div class="search-box">
-          <input type="text" id="searchInput" class="search-input" placeholder="Search documentation..." />
+          <input type="text" id="searchInput" class="search-input" placeholder="Search documentation... / ابحث في الأدلة" />
         </div>
         <nav id="docNav"></nav>
       </aside>
@@ -417,7 +659,6 @@
         }
       ];
 
-      // State
       let currentLang = "ar";
       let currentDoc = "index";
 
@@ -475,7 +716,7 @@
             a.onclick = (e) => {
               e.preventDefault();
               loadDoc(item.id);
-              if (window.innerWidth <= 860) {
+              if (window.innerWidth <= 768) {
                 document.getElementById("sidebar").classList.remove("open");
               }
             };
@@ -509,14 +750,13 @@
           });
           window.scrollTo({ top: 0, behavior: "smooth" });
         } catch (err) {
-          docBody.innerHTML = '<div style="padding: 40px 0; text-align: center; color: #e53935;">' +
+          docBody.innerHTML = '<div style="padding: 40px 0; text-align: center; color: var(--muted);">' +
             (currentLang === "ar" ? "تعذر تحميل هذا الدليل حالياً." : "Could not load this document.") +
-            '<br><br><a href="/docs/' + currentLang + '/index" class="nav-link-btn" style="display:inline-block;">' +
+            '<br><br><a href="/docs/' + currentLang + '/index" class="github-btn" style="display:inline-flex;">' +
             (currentLang === "ar" ? "العودة للرئيسية" : "Back to Overview") + '</a></div>';
         }
       }
 
-      // Event Listeners
       document.getElementById("langSelect").addEventListener("change", (e) => {
         currentLang = e.target.value;
         updateDirection();
@@ -527,13 +767,20 @@
       const themeToggle = document.getElementById("themeToggle");
       themeToggle.addEventListener("click", () => {
         const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-        document.documentElement.setAttribute("data-theme", isDark ? "light" : "dark");
-        localStorage.setItem("avro_theme", isDark ? "light" : "dark");
+        const nextTheme = isDark ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", nextTheme);
+        localStorage.setItem("avro_theme", nextTheme);
+        
+        const hljsLink = document.getElementById("hljsTheme");
+        if (hljsLink) {
+          hljsLink.href = nextTheme === "dark" 
+            ? "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css"
+            : "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+        }
       });
 
-      if (localStorage.getItem("avro_theme") === "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.documentElement.setAttribute("data-theme", "dark");
-      }
+      const savedTheme = localStorage.getItem("avro_theme") || "dark";
+      document.documentElement.setAttribute("data-theme", savedTheme);
 
       document.getElementById("menuToggle").addEventListener("click", () => {
         document.getElementById("sidebar").classList.toggle("open");
@@ -554,7 +801,6 @@
         loadDoc(currentDoc);
       });
 
-      // Init
       parseRoute();
       updateDirection();
       renderNav();
