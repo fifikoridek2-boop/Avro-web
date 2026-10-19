@@ -631,26 +631,44 @@
 
       <main>
         <article class="markdown-body" id="docBody" data-loaded-doc="index" data-loaded-lang="ar">
-          <h1>دليل توثيق Avro</h1>
-<p>Avro هو تطبيق أندرويد مفتوح المصدر للذكاء الاصطناعي المستقل، يعمل بمبدأ السيادة الكاملة على البيانات (BYOK - Bring Your Own Key).</p>
-<hr>
-<h2>الأهداف الأساسية</h2>
+          <h1>دليل توثيق Avro الرسمي</h1>
+<p>تطبيق <strong>Avro</strong> هو عميل أندرويد متكامل بنظام BYOK للنماذج اللغوية المستضافة سحابياً والمشغلة محلياً على الأجهزة. تُخزّن المحادثات والبيانات محلياً على جهازك، بينما يتم الاتصال بالمزودين والأدوات المهيأة مباشرة من هاتفك دون أي خوادم وسيطة خاصة بنا.</p>
+<h2>ابدأ من هنا</h2>
 <ul>
-<li>الخصوصية التامة: لا توجد خوادم وسيطة بينك وبين موفري النماذج؛ الطلبات والمفاتيح تدار مباشرة من جهازك.</li>
-<li>ترمينال لينكس مدمج (Alpine Linux): تنفيذ الأوامر، وتثبيت الحزم عبر apk، والتشغيل البرمجي الحقيقي في بيئة معزولة عبر PRoot.</li>
-<li>دعم النماذج المتعددة: التوافق مع أكثر من 10 مزودين (OpenAI, Claude, Gemini, DeepSeek, Groq, Ollama, Llama.cpp محلياً).</li>
-<li>أدوات الوكيل الذكي (Agentic Tools): البحث في الويب، استرجاع السياق عبر الذاكرة، دعم بروتوكول MCP، والمهام المستقلة المجدولة.</li>
+<li><a href="getting-started.md">دليل البدء السريع</a></li>
+<li><a href="provider.md">مزودو الخدمة</a> و <a href="models.md">إدارة النماذج</a></li>
+<li><a href="conversations.md">إدارة المحادثات</a></li>
+<li><a href="context.md">إدارة السياق والضغط</a></li>
+<li><a href="privacy.md">الخصوصية وأمان البيانات</a></li>
 </ul>
-<hr>
-<h2>أقسام التوثيق</h2>
+<h2>تهيئة التوليد والذكاء</h2>
 <ul>
-<li><a href="getting-started.md">دليل البداية السريعة</a></li>
-<li><a href="../en/sandbox.md">ساندبوكس لينكس</a></li>
-<li><a href="../en/tools.md">الأدوات المستقلة</a></li>
-<li><a href="../en/mcp.md">بروتوكول MCP</a></li>
-<li><a href="../en/models.md">النماذج والموفرين</a></li>
-<li><a href="../en/appearance.md">الهوية البصرية والسمات</a></li>
+<li><a href="generation.md">معايير التوليد والحرارة</a></li>
+<li><a href="title-generation.md">توليد العناوين التلقائي</a></li>
+<li><a href="transcription.md">التفريغ الصوتي للصور (Vision Transcription)</a></li>
+<li><a href="image-generation.md">توليد الصور</a></li>
+<li><a href="system-prompts.md">تعليمات النظام (System Prompts)</a></li>
 </ul>
+<h2>توسيع قدرات Avro</h2>
+<ul>
+<li><a href="tools.md">بيئة الأدوات المستقلة (Agentic Tools)</a></li>
+<li><a href="mcp.md">بروتوكول سياق النماذج (MCP Servers)</a></li>
+<li><a href="automation.md">الأتمتة والمهام المجدولة</a></li>
+<li><a href="web-search.md">البحث في الويب</a></li>
+<li><a href="shell.md">الاتصال الطرفي البعيد (Shell / Conch)</a></li>
+<li><a href="sandbox.md">بيئة Alpine Linux المعزولة (Sandbox)</a></li>
+</ul>
+<h2>المعرفة والبيانات</h2>
+<ul>
+<li><a href="search.md">البحث في المحادثات</a></li>
+<li><a href="embedding.md">التضمين الشعاعي والـ RAG</a></li>
+<li><a href="memory.md">الذاكرة والتخزين المؤقت</a></li>
+<li><a href="skills.md">مهارات الوكلاء (Skills)</a></li>
+<li><a href="local-model.md">النماذج المحلية (GGUF)</a></li>
+<li><a href="pdf-import.md">قراءة مستندات PDF</a></li>
+<li><a href="import-export.md">النسخ الاحتياطي والاستيراد والتصدير</a></li>
+</ul>
+<p>لضبط خيارات الجهاز، راجع <a href="appearance.md">المظهر والواجهة</a>، و <a href="language.md">تعدد اللغات</a>، و <a href="proxy.md">البروكسي والشبكة</a>.</p>
 
         </article>
       </main>

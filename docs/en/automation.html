@@ -640,8 +640,10 @@
 <p>A Loop belongs to one conversation and starts another generation after a configured interval. It may inject a prompt on each cycle and has a maximum-cycle safety limit. Only one active Loop can belong to a conversation.</p>
 <h2>Tools</h2>
 <p><strong>Access Tasks and Loops</strong> is disabled by default. When enabled, the model can create, list, and delete Tasks and can start or stop the current conversation&#39;s Loop. The permission is checked again when a tool executes, so turning it off blocks a previously proposed call from changing automation state.</p>
-<p>!!! warning
-    Enable automation access only when you want the model to change persistent schedules. A scheduled prompt can call providers and enabled tools in the background.</p>
+<blockquote>
+<p><strong>Warning</strong></p>
+<p>Enable automation access only when you want the model to change persistent schedules. A scheduled prompt can call providers and enabled tools in the background.</p>
+</blockquote>
 <h2>Background Execution</h2>
 <p>Avro normally uses battery-friendly inexact alarms, so Android may delay a run.</p>
 <p><strong>Exact Execution</strong> requests exact alarms for Tasks and Loops. On Android 12 and newer, enabling it opens the system <strong>Alarms &amp; reminders</strong> access flow when needed. If access is denied or later revoked, Avro turns Exact Execution off and falls back to inexact scheduling.</p>

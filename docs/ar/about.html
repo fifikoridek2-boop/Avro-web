@@ -631,14 +631,22 @@
 
       <main>
         <article class="markdown-body" id="docBody" data-loaded-doc="about" data-loaded-lang="ar">
-          <h1>حول تطبيق Avro</h1>
-<p>Avro هو تطبيق محلي مفتوح المصدر لنظام أندرويد، مصمم كعميل ذكاء اصطناعي وبيئة تشغيل للوكلاء المستقلين مع السيادة الكاملة على البيانات (BYOK).</p>
-<h2>المبادئ الأساسية</h2>
+          <h1>حول Avro</h1>
+<p>تطبيق <strong>Avro</strong> هو عميل أندرويد مفتوح المصدر ومستقل للذكاء الاصطناعي بنظام BYOK (أحضر مفتاحك الخاص - Bring Your Own Key). يقوم التطبيق بتخزين المحادثات والبيانات والإعدادات محلياً على جهازك، بينما يتصل مباشرة بمزودي خدمات الذكاء الاصطناعي والأدوات التي قمت بتهيئتها دون أي خوادم وسيطة خاصة بنا.</p>
+<h2>الترخيص والاستخدام</h2>
+<p>تطبيق Avro مرخص بموجب <strong>رخصة جنو العمومية (GPLv3)</strong>. يمكنك فحص الكود البرمجي المصدري، وتعديله، وإعادة توزيعه وفق شروط هذه الرخصة.</p>
+<h2>المطور والمشروع</h2>
 <ul>
-<li><strong>غياب الخوادم الوسيطة</strong>: يتصل التطبيق مباشرة بموفري الذكاء الاصطناعي دون أي خوادم بروكسي أو تجميع بيانات خارجية.</li>
-<li><strong>التشغيل المحلي</strong>: محادثاتك، أدواتك، وذاكرتك مخزنة محلياً ومشفرة على جهازك.</li>
-<li><strong>بيئة لينكس مدمجة</strong>: نظام Alpine Linux حقيقي يعمل دون صلاحيات روت عبر PRoot.</li>
-<li><strong>بروتوكول MCP</strong>: تكامل مباشر مع خوادم Model Context Protocol لتوسيع قدرات النموذج.</li>
+<li><strong>فريق التطوير</strong>: يتم تطوير وصيانة المشروع بواسطة <strong>Akio co</strong>.</li>
+<li><strong>المستودع الرسمي</strong>: <a href="https://github.com/fifikoridek2-boop/Avro">https://github.com/fifikoridek2-boop/Avro</a></li>
+<li><strong>منصة الويب والتوثيق</strong>: <a href="https://avro-app.vercel.app">https://avro-app.vercel.app</a></li>
+<li><strong>الإبلاغ عن المشاكل والاقتراحات</strong>: <a href="https://github.com/fifikoridek2-boop/Avro/issues">https://github.com/fifikoridek2-boop/Avro/issues</a></li>
+</ul>
+<h2>الفلسفة التقنية</h2>
+<ul>
+<li><strong>الخصوصية أولاً</strong>: لا توجد خوادم تجمع بياناتك أو محادثاتك. محادثاتك وسجلاتك مخزنة على جهازك عبر قاعدة بيانات مشفرة ومؤمنة.</li>
+<li><strong>الحرية الكاملة في اختيار النماذج</strong>: حرية التبديل بين أشهر مزودي الذكاء الاصطناعي (OpenAI, Anthropic, Google Gemini, Groq, Mistral, DeepSeek, OpenRouter وغيرها)، أو تشغيل نماذج محلية بالكامل عبر GGUF دون اتصال بالإنترنت.</li>
+<li><strong>قدرات الوكلاء الذاتية (Agentic Workflows)</strong>: دعم بروتوكول MCP، وتكامل بيئة Alpine Linux المعزولة (Sandbox)، والاتصال البعيد (Shell/Conch)، والبحث في الويب، والأتمتة الذكية.</li>
 </ul>
 
         </article>

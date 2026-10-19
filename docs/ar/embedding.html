@@ -631,13 +631,26 @@
 
       <main>
         <article class="markdown-body" id="docBody" data-loaded-doc="embedding" data-loaded-lang="ar">
-          <h1>نماذج التضمين الشعاعي (Embeddings)</h1>
-<p>يدعم Avro توليد التضمينات الشعاعية محلياً وسحابياً لدعم ميزات البحث الدلالي والـ RAG.</p>
-<h2>الخيارات المتاحة</h2>
+          <h1>التضمين الشعاعي والـ RAG</h1>
+<p>تقوم نماذج التضمين الشعاعي (Embedding Models) بتحويل نصوص المحادثات إلى متجهات رقمية تُستخدم في البحث الدلالي الذكي داخل المحادثات. يمكن تهيئتها عبر <strong>الإعدادات ← البحث في المحادثات</strong>.</p>
+<h2>المزودون والخيارات المسبقة</h2>
+<p>تشمل النماذج المدعومة حالياً:</p>
 <ul>
-<li><strong>محلياً</strong>: تشغيل نماذج التضمين عبر llama.cpp المدمج بدون إنترنت.</li>
-<li><strong>سحابياً</strong>: الاتصال بنماذج التضمين الرسمية من OpenAI أو Google Gemini أو Ollama.</li>
+<li><strong>OpenAI</strong>: <code>text-embedding-3-small</code> و <code>text-embedding-3-large</code> و <code>text-embedding-ada-002</code></li>
+<li><strong>Mistral</strong>: <code>mistral-embed</code></li>
+<li><strong>Voyage AI</strong>: <code>voyage-3-large</code> و <code>voyage-3-lite</code> و <code>voyage-code-3</code></li>
+<li><strong>SiliconFlow</strong>: <code>BAAI/bge-m3</code> و <code>BAAI/bge-large-en-v1.5</code></li>
+<li><strong>OpenRouter</strong>: مسارات نماذج التضمين المتوافقة مع OpenAI</li>
+<li><strong>Ollama أو النماذج المحلية</strong>: نماذج GGUF مدمجة على جهازك بالكامل، أو عبر نقاط نهاية مخصصة (Custom Endpoints).</li>
 </ul>
+<p>تستخدم نماذج التضمين البعيدة بيانات الاعتماد ورابط الـ API الخاص بالمزود المختار، وبالتالي فإن النص المراد تضمينه يغادر جهازك إلى ذلك المزود. أما نماذج التضمين المحلية فتعمل محلياً بنسبة 100% على هاتفك.</p>
+<h2>معايير الـ RAG (الاسترجاع المعزز بالتوليد)</h2>
+<ul>
+<li><strong>نطاق السياق (Context range)</strong>: من 4 إلى 32 خطوة محادثة (بزيادات قدرها 4 خطوات).</li>
+<li><strong>عدد النتائج (Result count)</strong>: من 5 إلى 30 نتيجة (بزيادات قدرها 5).</li>
+<li><strong>عتبة التشابه (Similarity threshold)</strong>: من 0 إلى 1 (القيمة الافتراضية هي 0.5).</li>
+</ul>
+<p>تغيير نموذج التضمين قد يتطلب إعادة تضمين المحتوى المفهرس سابقاً قبل اكتمال دقة نتائج البحث. راجع <a href="search.md">البحث في المحادثات</a> و <a href="privacy.md">الخصوصية وأمان البيانات</a>.</p>
 
         </article>
       </main>
