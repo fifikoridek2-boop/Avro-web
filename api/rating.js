@@ -1,8 +1,6 @@
-// Serverless API for Avro User Ratings and Feedback
-// Matches RatingForm.kt payload from Avro Android App
+import { sendTelegramNotification, escapeHtml } from './telegram.js';
 
 export default async function handler(req, res) {
-  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
@@ -39,19 +37,32 @@ export default async function handler(req, res) {
 
     const feedbackId = 'rate_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 7);
 
-    // Diagnostic logging in Vercel Runtime Logs
-    console.log(JSON.stringify({
-      level: 'USER_RATING',
-      feedbackId,
-      rating: numericRating,
-      name: name.trim().substring(0, 100),
-      email: email.trim().substring(0, 150),
-      comment: comment.trim().substring(0, 10000),
-      appVersion,
-      versionCode,
-      device,
-      timestamp: new Date(ts).toISOString()
-    }));
+    // Build rich Telegram message with stars, formatting, and expandable blockquote
+    const stars = '⭐'.repeat(numericRating) + '☆'.repeat(5 - numericRating);
+    const formattedDate = new Date(ts).toLocaleString('en-US', { timeZone: 'UTC' });
+
+    const telegramHtml = `
+<b>🌟 New Avro Rating Received</b>
+━━━━━━━━━━━━━━━━━━
+<b>Score:</b> ${stars} (<code>${numericRating}/5</code>)
+<b>User:</b> <code>${escapeHtml(name ? name.trim() : 'Anonymous')}</code>
+<b>Email:</b> ${email && email.trim() ? `<code>${escapeHtml(email.trim())}</code>` : '<i>Not provided</i>'}
+<b>Device:</b> <code>${escapeHtml(device || 'Unknown')}</code>
+<b>App Version:</b> <code>v${escapeHtml(appVersion)} (${versionCode})</code>
+<b>Date:</b> <code>${formattedDate} UTC</code>
+━━━━━━━━━━━━━━━━━━
+<b>User Feedback:</b>
+<blockquote expandable>${escapeHtml(comment && comment.trim() ? comment.trim() : 'No comment provided.')}</blockquote>
+`.trim();
+
+    const keyboard = [];
+    if (email && email.trim().includes('@')) {
+      keyboard.push([{ text: '✉️ Reply via Email', url: `mailto:${email.trim()}` }]);
+    }
+    keyboard.push([{ text: '🌐 Avro Web Portal', url: 'https://avro-app.vercel.app' }]);
+
+    // Dispatch notification to Admin Telegram in background
+    await sendTelegramNotification(telegramHtml, keyboard);
 
     return res.status(200).json({
       accepted: true,

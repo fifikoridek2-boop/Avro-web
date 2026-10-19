@@ -65,3 +65,14 @@ Developed by **Akio co**.
 ## License
 
 GNU General Public License v3.0 (GPL-3.0).
+
+## Telegram Admin Bot Notifications
+
+When users submit ratings or when crash reports occur, Avro Web automatically dispatches structured, formatted alerts directly to the admin via Telegram Bot with expandable quotes and reply buttons.
+
+To enable this on **Vercel**:
+1. Go to your project settings in Vercel: **Settings -> Environment Variables**.
+2. Add the following variables:
+   - `TELEGRAM_BOT_TOKEN`: The bot token obtained from `@BotFather`.
+   - `TELEGRAM_ADMIN_CHAT_ID`: Your Telegram numeric chat ID (can be obtained via `@userinfobot`).
+3. Redeploy or trigger a build. All future ratings and crashes will arrive directly on your Telegram!
