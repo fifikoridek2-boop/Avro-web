@@ -42,26 +42,29 @@ export default async function handler(req, res) {
     const formattedDate = new Date(ts).toLocaleString('en-US', { timeZone: 'UTC' });
 
     const telegramHtml = `
-<b>🌟 New Avro Rating Received</b>
+<b>🌟 New Avro User Rating</b>
 ━━━━━━━━━━━━━━━━━━
 <b>Score:</b> ${stars} (<code>${numericRating}/5</code>)
 <b>User:</b> <code>${escapeHtml(name ? name.trim() : 'Anonymous')}</code>
 <b>Email:</b> ${email && email.trim() ? `<code>${escapeHtml(email.trim())}</code>` : '<i>Not provided</i>'}
 <b>Device:</b> <code>${escapeHtml(device || 'Unknown')}</code>
 <b>App Version:</b> <code>v${escapeHtml(appVersion)} (${versionCode})</code>
+<b>Feedback ID:</b> <code>${feedbackId}</code>
 <b>Date:</b> <code>${formattedDate} UTC</code>
 ━━━━━━━━━━━━━━━━━━
-<b>User Feedback:</b>
+<b>User Comment:</b>
 <blockquote expandable>${escapeHtml(comment && comment.trim() ? comment.trim() : 'No comment provided.')}</blockquote>
 `.trim();
 
-    const keyboard = [];
-    if (email && email.trim().includes('@')) {
-      keyboard.push([{ text: '✉️ Reply via Email', url: `mailto:${email.trim()}` }]);
-    }
-    keyboard.push([{ text: '🌐 Avro Web Portal', url: 'https://avro-app.vercel.app' }]);
+    // Valid HTTPS buttons only (Telegram strictly disallows mailto: in inline buttons)
+    const keyboard = [
+      [
+        { text: '🌐 Avro Web Portal', url: 'https://avro-app.vercel.app' },
+        { text: '📂 GitHub Repository', url: 'https://github.com/fifikoridek2-boop/Avro' }
+      ]
+    ];
 
-    // Dispatch notification to Admin Telegram in background
+    // Dispatch notification to Admin Telegram
     await sendTelegramNotification(telegramHtml, keyboard);
 
     return res.status(200).json({
