@@ -2,31 +2,61 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/api/(.*)$",
-      "dest": "/api/$1.js",
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Accept"
-      }
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
     },
     {
-      "src": "^/docs/content/(.*)$",
-      "dest": "/docs/content/$1"
+      "source": "/docs/content/:path*",
+      "destination": "/docs/content/:path*"
     },
     {
-      "src": "^/docs/(.*)$",
-      "dest": "/docs/index.html"
+      "source": "/docs/:lang/:page",
+      "destination": "/docs/:lang/:page/index.html"
     },
     {
-      "src": "^/docs$",
-      "dest": "/docs/index.html"
+      "source": "/docs/:lang/:page/",
+      "destination": "/docs/:lang/:page/index.html"
     },
     {
-      "src": "^/(.*)$",
-      "dest": "/$1"
+      "source": "/docs/:lang",
+      "destination": "/docs/:lang/index.html"
+    },
+    {
+      "source": "/docs/:lang/",
+      "destination": "/docs/:lang/index.html"
+    },
+    {
+      "source": "/docs",
+      "destination": "/docs/index.html"
+    },
+    {
+      "source": "/docs/",
+      "destination": "/docs/index.html"
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "/docs/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,POST,OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Accept"
+        }
+      ]
     }
   ]
 }

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Avro Documentation · دليل توثيق Avro</title>
+    <title>نظرة عامة وتوثيق Avro · Avro Documentation</title>
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 768 768'%3E%3Cg transform='translate(-34 -17)'%3E%3Cpath d='M201.8 589.6L402.6 202.1L634.5 600.6' fill='none' stroke='%23fff' stroke-width='144.01' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"
@@ -17,7 +17,6 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" id="hljsTheme" />
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/highlight.min.js"></script>
-
     <style>
       :root {
         --ink: #0d0d0d;
@@ -84,6 +83,7 @@
       [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
         background: rgba(255, 255, 255, 0.32);
       }
+
       * {
         scrollbar-width: thin;
         scrollbar-color: rgba(140, 140, 140, 0.24) transparent;
@@ -96,12 +96,12 @@
         font-family: var(--font-main);
         background: var(--surface);
         color: var(--ink);
-        line-height: 1.65;
-        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
       }
 
-      /* Header Bar */
+      /* Header */
       header {
         position: sticky;
         top: 0;
@@ -113,45 +113,39 @@
         align-items: center;
         justify-content: space-between;
         padding: 0 24px;
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(12px);
       }
 
-      .header-start {
-        display: inline-flex;
+      .brand-wrap {
+        display: flex;
         align-items: center;
         gap: 12px;
       }
 
-      .brand-box {
+      .brand-link {
         display: inline-flex;
         align-items: center;
         gap: 10px;
         text-decoration: none;
         color: var(--ink);
-        flex-shrink: 0;
       }
 
       .brand-logo {
-        height: 22px;
+        height: 24px;
         width: auto;
-        display: block;
         fill: currentColor;
       }
 
       .docs-tag {
-        display: inline-flex;
-        align-items: center;
         font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.06em;
+        font-weight: 600;
         text-transform: uppercase;
-        padding: 3px 8px;
-        border-radius: 6px;
+        letter-spacing: 0.08em;
         background: var(--surface-sub);
-        color: var(--muted);
         border: 1px solid var(--border);
-        line-height: 1;
+        color: var(--muted);
+        padding: 2.5px 8px;
+        border-radius: 6px;
       }
 
       .header-actions {
@@ -160,11 +154,24 @@
         gap: 10px;
       }
 
-      /* Custom Modern Dropdown Pill */
+      /* Custom Modern Dropdown Pill (No abbreviations, clean globe icon) */
       .select-wrapper {
         position: relative;
         display: inline-flex;
         align-items: center;
+      }
+
+      .globe-icon {
+        position: absolute;
+        left: 12px;
+        pointer-events: none;
+        width: 14px;
+        height: 14px;
+        color: var(--muted);
+      }
+      html[dir="rtl"] .globe-icon {
+        left: auto;
+        right: 12px;
       }
 
       .lang-select {
@@ -174,7 +181,7 @@
         background: var(--surface-sub);
         border: 1px solid var(--border);
         color: var(--ink);
-        padding: 7px 32px 7px 14px;
+        padding: 7px 30px 7px 32px;
         border-radius: 999px;
         font-family: inherit;
         font-size: 13.5px;
@@ -184,7 +191,7 @@
         transition: all 0.2s;
       }
       html[dir="rtl"] .lang-select {
-        padding: 7px 14px 7px 32px;
+        padding: 7px 32px 7px 30px;
       }
       .lang-select:hover, .lang-select:focus {
         border-color: var(--muted);
@@ -224,17 +231,17 @@
         justify-content: center;
         cursor: pointer;
         transition: all 0.2s;
-        flex-shrink: 0;
+        outline: none;
       }
       .icon-btn:hover {
-        background: var(--accent-light);
         border-color: var(--muted);
+        background: var(--accent-light);
       }
 
       .github-btn {
         display: inline-flex;
         align-items: center;
-        gap: 7px;
+        gap: 6px;
         background: var(--surface-sub);
         border: 1px solid var(--border);
         color: var(--ink);
@@ -256,12 +263,9 @@
         background: none;
         border: none;
         color: var(--ink);
+        font-size: 22px;
         cursor: pointer;
-        padding: 6px;
-        border-radius: 6px;
-      }
-      .menu-toggle:hover {
-        background: var(--surface-sub);
+        padding: 4px;
       }
 
       /* Layout */
@@ -271,199 +275,194 @@
       }
 
       /* Sidebar */
-      aside {
+      #sidebar {
         width: var(--sidebar-w);
-        border-right: 1px solid var(--border);
+        flex-shrink: 0;
         background: var(--surface);
-        overflow-y: auto;
+        border-inline-end: 1px solid var(--border);
+        height: calc(100vh - var(--header-h));
         position: sticky;
         top: var(--header-h);
-        height: calc(100vh - var(--header-h));
-        padding: 20px 14px 40px;
-        flex-shrink: 0;
-      }
-      html[dir="rtl"] aside {
-        border-right: none;
-        border-left: 1px solid var(--border);
+        overflow-y: auto;
+        padding: 20px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
       }
 
       .search-box {
-        margin-bottom: 18px;
+        position: sticky;
+        top: 0;
+        background: var(--surface);
+        padding-bottom: 4px;
+        z-index: 10;
       }
+
       .search-input {
         width: 100%;
         background: var(--surface-sub);
         border: 1px solid var(--border);
+        color: var(--ink);
         padding: 8px 12px;
         border-radius: 8px;
-        color: var(--ink);
         font-family: inherit;
-        font-size: 13.5px;
+        font-size: 13px;
         outline: none;
-        transition: border-color 0.2s;
+        transition: border 0.2s;
       }
       .search-input:focus {
-        border-color: var(--muted);
+        border-color: var(--ink);
       }
 
       .nav-group-title {
         font-size: 11px;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: var(--muted);
-        font-weight: 700;
-        margin: 20px 8px 8px;
+        margin: 14px 10px 6px;
       }
+
       .nav-item {
         display: block;
         padding: 7px 12px;
-        border-radius: 6px;
+        border-radius: 8px;
+        color: var(--ink);
+        opacity: 0.76;
         text-decoration: none;
-        color: var(--muted);
         font-size: 13.5px;
-        transition: all 0.15s ease;
+        font-weight: 450;
         margin-bottom: 2px;
-        border-inline-start: 3px solid transparent;
+        transition: all 0.15s;
+        border: 1px solid transparent;
       }
       .nav-item:hover {
-        color: var(--ink);
+        opacity: 1;
         background: var(--surface-sub);
       }
       .nav-item.active {
-        color: var(--ink);
-        background: var(--accent-light);
+        opacity: 1;
+        background: var(--surface-sub);
+        border-color: var(--border);
         font-weight: 600;
-        border-inline-start-color: var(--ink);
       }
 
-      /* Main Article Content */
+      /* Main Content */
       main {
         flex: 1;
+        padding: 40px 48px 100px;
         max-width: 860px;
         margin: 0 auto;
-        padding: 44px 36px 90px;
+        width: 100%;
       }
 
-      .doc-content h1 {
-        font-size: 36px;
-        letter-spacing: -0.035em;
-        margin-bottom: 20px;
-        line-height: 1.25;
-        font-weight: 700;
-      }
-      .doc-content h2 {
-        font-size: 24px;
-        letter-spacing: -0.025em;
-        margin: 40px 0 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--border);
-        font-weight: 600;
-      }
-      .doc-content h3 {
-        font-size: 19px;
-        letter-spacing: -0.015em;
-        margin: 28px 0 12px;
-        font-weight: 600;
-      }
-      .doc-content p {
-        margin-bottom: 18px;
-        font-size: 16px;
-        color: var(--ink);
-        line-height: 1.75;
-      }
-
-      /* Pure Monochrome Link Styling — NO BLUE! */
-      .doc-content a {
-        color: inherit;
-        font-weight: 500;
-        text-decoration: underline;
-        text-decoration-color: var(--muted);
-        text-underline-offset: 3.5px;
-        transition: all 0.2s ease;
-      }
-      .doc-content a:hover {
-        color: var(--ink);
-        text-decoration-color: var(--ink);
-        background: var(--surface-sub);
-        border-radius: 4px;
-      }
-
-      .doc-content ul, .doc-content ol {
-        margin: 0 0 20px 24px;
-      }
-      html[dir="rtl"] .doc-content ul, html[dir="rtl"] .doc-content ol {
-        margin: 0 24px 20px 0;
-      }
-      .doc-content li {
-        margin-bottom: 8px;
+      /* Markdown Typography */
+      .markdown-body {
         line-height: 1.7;
+        font-size: 15px;
       }
-
-      /* Monochrome Code Blocks */
-      .doc-content pre {
-        background: var(--surface-sub) !important;
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 16px 18px;
-        overflow-x: auto;
-        margin: 22px 0;
-        font-family: var(--font-mono);
-        font-size: 13.5px;
-        line-height: 1.65;
-        direction: ltr !important;
-        text-align: left !important;
+      .markdown-body h1 {
+        font-size: 2.1rem;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
       }
-      .doc-content code:not(pre code) {
-        background: var(--surface-sub);
-        border: 1px solid var(--border);
+      .markdown-body h2 {
+        font-size: 1.45rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        margin-top: 36px;
+        margin-bottom: 14px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--border);
+      }
+      .markdown-body h3 {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-top: 24px;
+        margin-bottom: 10px;
+      }
+      .markdown-body p {
+        margin-bottom: 16px;
         color: var(--ink);
-        padding: 2.5px 7px;
-        border-radius: 6px;
+        opacity: 0.92;
+      }
+      .markdown-body ul, .markdown-body ol {
+        margin-bottom: 18px;
+        padding-inline-start: 24px;
+      }
+      .markdown-body li {
+        margin-bottom: 6px;
+      }
+      .markdown-body code {
         font-family: var(--font-mono);
         font-size: 13px;
+        background: var(--surface-sub);
+        border: 1px solid var(--border);
+        padding: 2px 6px;
+        border-radius: 5px;
       }
-
-      .doc-content blockquote {
-        border-left: 3px solid var(--border);
-        padding-left: 16px;
-        margin: 22px 0;
-        color: var(--muted);
-        font-style: normal;
+      .markdown-body pre {
+        background: var(--surface-sub);
+        border: 1px solid var(--border);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 18px 0 22px;
       }
-      html[dir="rtl"] .doc-content blockquote {
-        border-left: none;
-        border-right: 3px solid var(--border);
-        padding-left: 0;
-        padding-right: 16px;
+      .markdown-body pre code {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 13px;
       }
-
-      .doc-content table {
+      .markdown-body blockquote {
+        border-inline-start: 3px solid var(--ink);
+        padding: 8px 16px;
+        margin: 18px 0;
+        background: var(--surface-sub);
+        border-radius: 0 6px 6px 0;
+        opacity: 0.9;
+      }
+      html[dir="rtl"] .markdown-body blockquote {
+        border-radius: 6px 0 0 6px;
+      }
+      .markdown-body table {
         width: 100%;
         border-collapse: collapse;
-        margin: 24px 0;
-        font-size: 14.5px;
+        margin: 20px 0;
       }
-      .doc-content th, .doc-content td {
+      .markdown-body th, .markdown-body td {
         border: 1px solid var(--border);
-        padding: 11px 15px;
-        text-align: left;
+        padding: 10px 14px;
+        text-align: start;
       }
-      html[dir="rtl"] .doc-content th, html[dir="rtl"] .doc-content td {
-        text-align: right;
-      }
-      .doc-content th {
+      .markdown-body th {
         background: var(--surface-sub);
         font-weight: 600;
       }
+      .markdown-body a {
+        color: var(--ink);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        font-weight: 500;
+      }
+      .markdown-body hr {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 32px 0;
+      }
 
-      /* Mobile Precision Overrides */
+      /* Mobile Responsive */
       @media (max-width: 768px) {
         header {
           padding: 0 14px;
           height: 60px;
         }
         .header-actions {
-          gap: 7px;
+          gap: 6px;
         }
         .github-btn span {
           display: none;
@@ -479,14 +478,23 @@
           width: 34px;
           height: 34px;
         }
+        .globe-icon {
+          width: 12px;
+          height: 12px;
+          left: 9px;
+        }
+        html[dir="rtl"] .globe-icon {
+          left: auto;
+          right: 9px;
+        }
         .lang-select {
           font-size: 12px;
-          padding: 6px 24px 6px 10px;
+          padding: 6px 20px 6px 24px;
           max-width: 105px;
           text-overflow: ellipsis;
         }
         html[dir="rtl"] .lang-select {
-          padding: 6px 10px 6px 24px;
+          padding: 6px 24px 6px 20px;
         }
         .select-chevron {
           right: 8px;
@@ -501,50 +509,41 @@
           font-size: 10px;
           padding: 2px 6px;
         }
-
-        aside {
-          position: fixed;
-          left: -100%;
-          top: 60px;
-          z-index: 95;
-          transition: left 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-          width: 82%;
-          max-width: 320px;
-          box-shadow: 4px 0 24px rgba(0,0,0,0.25);
-          height: calc(100vh - 60px);
-        }
-        html[dir="rtl"] aside {
-          left: auto;
-          right: -100%;
-          transition: right 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-          box-shadow: -4px 0 24px rgba(0,0,0,0.25);
-        }
-        aside.open {
-          left: 0;
-        }
-        html[dir="rtl"] aside.open {
-          right: 0;
-        }
         .menu-toggle {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
+          display: block;
+        }
+        #sidebar {
+          position: fixed;
+          top: 60px;
+          bottom: 0;
+          left: 0;
+          right: auto;
+          z-index: 99;
+          transform: translateX(-100%);
+          transition: transform 0.25s ease;
+          box-shadow: 2px 0 16px rgba(0,0,0,0.15);
+        }
+        html[dir="rtl"] #sidebar {
+          left: auto;
+          right: 0;
+          transform: translateX(100%);
+        }
+        #sidebar.open {
+          transform: translateX(0);
         }
         main {
-          padding: 24px 18px 60px;
+          padding: 24px 18px 80px;
         }
       }
     </style>
   </head>
   <body>
     <header>
-      <div class="header-start">
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-        <a href="/" class="brand-box" aria-label="Avro Documentation Home">
-          <svg class="brand-logo" viewBox="70 70 1941 662">
-            <path d="M264.50 312.13L338.68 168.99A72.01 72.01 0 0 1 464.85 165.90L696.74 564.41A72.01 72.01 0 0 1 572.26 636.84L406.26 351.57L392.36 378.39Z" />
+      <div class="brand-wrap">
+        <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation">☰</button>
+        <a href="/" class="brand-link" aria-label="Avro Home">
+          <svg class="brand-logo" viewBox="70 70 1941 662" role="img">
+            <path d="M201.8 589.6L402.6 202.1L634.5 600.6" fill="none" stroke="currentColor" stroke-width="144.01" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M245.43 348.93L137.90 556.43A72.01 72.00 0 0 0 265.76 622.69L373.29 415.19Z" />
             <path d="M914.9 672.0 756.8 298.9H883.4L990.9 609.0H936.4L1043.1 298.9H1167.5L1010.1 672.0Z" />
             <path d="M1210.5 672.0V298.9H1327.2V672.0ZM1327.2 466.3 1277.3 429.4Q1291.9 362.6 1326.8 326.9Q1361.7 291.2 1422.4 291.2Q1450.0 291.2 1470.3 298.9Q1490.7 306.6 1506.0 324.2L1437.0 412.5Q1429.3 404.1 1417.8 399.8Q1406.2 395.6 1391.7 395.6Q1361.7 395.6 1344.4 413.3Q1327.2 430.9 1327.2 466.3Z" />
@@ -556,11 +555,16 @@
 
       <div class="header-actions">
         <div class="select-wrapper">
-          <select id="langSelect" class="lang-select" aria-label="Select Language">
-            <option value="ar">🇸🇦 العربية</option>
-            <option value="en">🇺🇸 English</option>
-            <option value="zh">🇨🇳 简体中文</option>
-            <option value="zh-Hant">🇹🇼 繁體中文</option>
+          <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <select id="langSelect" class="lang-select" aria-label="Language">
+            <option value="ar" selected>العربية</option>
+            <option value="en">English</option>
+            <option value="zh">简体中文</option>
+            <option value="zh-Hant">繁體中文</option>
           </select>
           <svg class="select-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
@@ -573,7 +577,7 @@
 
         <a href="https://github.com/fifikoridek2-boop/Avro" target="_blank" rel="noopener" class="github-btn" aria-label="Avro on GitHub">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
           </svg>
           <span>GitHub</span>
         </a>
@@ -583,110 +587,99 @@
     <div class="layout-container">
       <aside id="sidebar">
         <div class="search-box">
-          <input type="text" id="searchInput" class="search-input" placeholder="Search documentation... / ابحث في الأدلة" />
+          <input type="text" id="searchInput" class="search-input" placeholder="بحث في التوثيق..." />
         </div>
-        <nav id="docNav"></nav>
+        <nav id="docNav">
+          <div class="nav-group-title">البداية والإعداد</div>
+<a class="nav-item" href="/docs/ar/getting-started">دليل البدء السريع</a>
+<a class="nav-item" href="/docs/ar/about">حول مشروع Avro</a>
+<a class="nav-item" href="/docs/ar/faq">الأسئلة الشائعة</a>
+<a class="nav-item" href="/docs/ar/privacy">الخصوصية وأمان البيانات</a>
+<div class="nav-group-title">النماذج ومزودو الخدمة</div>
+<a class="nav-item" href="/docs/ar/provider">مزودو الذكاء الاصطناعي</a>
+<a class="nav-item" href="/docs/ar/models">النماذج والتهيئة</a>
+<a class="nav-item" href="/docs/ar/local-model">النماذج المحلية (دون إنترنت)</a>
+<a class="nav-item" href="/docs/ar/system-prompts">التعليمات البرمجية الموجهة</a>
+<a class="nav-item" href="/docs/ar/generation">معايير التوليد والحرارة</a>
+<a class="nav-item" href="/docs/ar/context">نافذة السياق والتوكنز</a>
+<div class="nav-group-title">الأدوات والتكامل والـ MCP</div>
+<a class="nav-item" href="/docs/ar/tools">بيئة الأدوات المدمجة</a>
+<a class="nav-item" href="/docs/ar/mcp">بروتوكول سياق النموذج (MCP)</a>
+<a class="nav-item" href="/docs/ar/skills">مهارات الوكلاء المستقلين</a>
+<a class="nav-item" href="/docs/ar/sandbox">بيئة التشغيل المعزولة (Sandbox)</a>
+<a class="nav-item" href="/docs/ar/shell">أوامر سطر الأوامر (Shell)</a>
+<a class="nav-item" href="/docs/ar/automation">الأتمتة والمهام المجدولة</a>
+<div class="nav-group-title">البحث والذاكرة والتضمين</div>
+<a class="nav-item" href="/docs/ar/search">البحث في المحادثات</a>
+<a class="nav-item" href="/docs/ar/web-search">البحث في الويب</a>
+<a class="nav-item" href="/docs/ar/embedding">التضمين الشعاعي والـ RAG</a>
+<a class="nav-item" href="/docs/ar/memory">الذاكرة النشطة</a>
+<div class="nav-group-title">الوسائط والذكاء</div>
+<a class="nav-item" href="/docs/ar/image-generation">توليد الصور</a>
+<a class="nav-item" href="/docs/ar/transcription">التفريغ الصوتي (Whisper)</a>
+<a class="nav-item" href="/docs/ar/pdf-import">استيراد وقراءة PDF</a>
+<div class="nav-group-title">النظام والبيانات</div>
+<a class="nav-item" href="/docs/ar/import-export">النسخ الاحتياطي (.avro)</a>
+<a class="nav-item" href="/docs/ar/conversations">إدارة المحادثات والتفرع</a>
+<a class="nav-item" href="/docs/ar/appearance">المظهر والسمات الأحادية</a>
+<a class="nav-item" href="/docs/ar/language">تعدد اللغات</a>
+<a class="nav-item" href="/docs/ar/title-generation">توليد العناوين التلقائي</a>
+<a class="nav-item" href="/docs/ar/proxy">البروكسي والشبكة</a>
+
+        </nav>
       </aside>
 
       <main>
-        <article id="docBody" class="doc-content">
-          <div style="padding: 40px 0; text-align: center; color: var(--muted);">Loading documentation...</div>
+        <article class="markdown-body" id="docBody" data-loaded-doc="index" data-loaded-lang="ar">
+          <h1>دليل توثيق Avro</h1>
+<p>Avro هو تطبيق أندرويد مفتوح المصدر للذكاء الاصطناعي المستقل، يعمل بمبدأ السيادة الكاملة على البيانات (BYOK - Bring Your Own Key).</p>
+<hr>
+<h2>الأهداف الأساسية</h2>
+<ul>
+<li>الخصوصية التامة: لا توجد خوادم وسيطة بينك وبين موفري النماذج؛ الطلبات والمفاتيح تدار مباشرة من جهازك.</li>
+<li>ترمينال لينكس مدمج (Alpine Linux): تنفيذ الأوامر، وتثبيت الحزم عبر apk، والتشغيل البرمجي الحقيقي في بيئة معزولة عبر PRoot.</li>
+<li>دعم النماذج المتعددة: التوافق مع أكثر من 10 مزودين (OpenAI, Claude, Gemini, DeepSeek, Groq, Ollama, Llama.cpp محلياً).</li>
+<li>أدوات الوكيل الذكي (Agentic Tools): البحث في الويب، استرجاع السياق عبر الذاكرة، دعم بروتوكول MCP، والمهام المستقلة المجدولة.</li>
+</ul>
+<hr>
+<h2>أقسام التوثيق</h2>
+<ul>
+<li><a href="getting-started.md">دليل البداية السريعة</a></li>
+<li><a href="../en/sandbox.md">ساندبوكس لينكس</a></li>
+<li><a href="../en/tools.md">الأدوات المستقلة</a></li>
+<li><a href="../en/mcp.md">بروتوكول MCP</a></li>
+<li><a href="../en/models.md">النماذج والموفرين</a></li>
+<li><a href="../en/appearance.md">الهوية البصرية والسمات</a></li>
+</ul>
+
         </article>
       </main>
     </div>
 
     <script>
-      const NAV_STRUCTURE = [
-        {
-          category: { en: "Getting Started", ar: "البداية والأساسيات", zh: "快速上手", "zh-Hant": "快速上手" },
-          items: [
-            { id: "index", title: { en: "Overview", ar: "نظرة عامة", zh: "概述", "zh-Hant": "概述" } },
-            { id: "getting-started", title: { en: "Getting Started", ar: "البداية السريعة", zh: "入门指南", "zh-Hant": "入門指南" } },
-            { id: "about", title: { en: "About Avro", ar: "حول Avro", zh: "关于 Avro", "zh-Hant": "關於 Avro" } },
-            { id: "privacy", title: { en: "Privacy Policy", ar: "سياسة الخصوصية", zh: "隐私政策", "zh-Hant": "隱私政策" } },
-            { id: "faq", title: { en: "FAQ", ar: "الأسئلة الشائعة", zh: "常见问题", "zh-Hant": "常見問題" } }
-          ]
-        },
-        {
-          category: { en: "Models & Providers", ar: "النماذج وموفرو الخدمة", zh: "模型与提供商", "zh-Hant": "模型與提供商" },
-          items: [
-            { id: "models", title: { en: "Manage Models", ar: "إدارة النماذج", zh: "模型管理", "zh-Hant": "模型管理" } },
-            { id: "provider", title: { en: "API Providers", ar: "موفرو الخدمة ومفاتيح API", zh: "API 提供商", "zh-Hant": "API 提供商" } },
-            { id: "local-model", title: { en: "Local Models (GGUF)", ar: "النماذج المحلية (GGUF)", zh: "本地模型", "zh-Hant": "本地模型" } },
-            { id: "context", title: { en: "Context Accounting", ar: "إدارة السياق والرموز", zh: "上下文核算", "zh-Hant": "上下文核算" } },
-            { id: "generation", title: { en: "Generation Settings", ar: "معلمات التوليد", zh: "生成参数", "zh-Hant": "生成參數" } },
-            { id: "system-prompts", title: { en: "System Prompts", ar: "التوجيهات النظامية", zh: "系统提示词", "zh-Hant": "系統提示詞" } }
-          ]
-        },
-        {
-          category: { en: "Agentic Tools & Sandbox", ar: "أدوات الوكيل وساندبوكس", zh: "智能体工具与沙盒", "zh-Hant": "智能體工具與沙盒" },
-          items: [
-            { id: "tools", title: { en: "Tools Overview", ar: "نظرة عامة على الأدوات", zh: "工具概览", "zh-Hant": "工具概覽" } },
-            { id: "sandbox", title: { en: "Linux Sandbox (PRoot)", ar: "ساندبوكس لينكس (PRoot)", zh: "Linux 沙盒", "zh-Hant": "Linux 沙盒" } },
-            { id: "shell", title: { en: "Shell Execution", ar: "أوامر الشل والتحكم", zh: "Shell 设置", "zh-Hant": "Shell 設定" } },
-            { id: "mcp", title: { en: "Model Context Protocol", ar: "بروتوكول MCP", zh: "MCP 协议", "zh-Hant": "MCP 協定" } },
-            { id: "automation", title: { en: "Automation & Loops", ar: "الأتمتة وحلقات العمل", zh: "自动化与循环", "zh-Hant": "自動化與循環" } },
-            { id: "skills", title: { en: "Custom Skills", ar: "المهارات المخصصة", zh: "技能管理", "zh-Hant": "技能管理" } }
-          ]
-        },
-        {
-          category: { en: "Search & Memory", ar: "البحث والذاكرة", zh: "搜索与记忆", "zh-Hant": "搜尋與記憶" },
-          items: [
-            { id: "search", title: { en: "Conversation Search", ar: "البحث في المحادثات", zh: "对话搜索", "zh-Hant": "對話搜尋" } },
-            { id: "web-search", title: { en: "Web Search", ar: "البحث في الويب", zh: "网络搜索", "zh-Hant": "網路搜尋" } },
-            { id: "embedding", title: { en: "Embedding & RAG", ar: "التضمين الشعاعي والـ RAG", zh: "嵌入与检索", "zh-Hant": "嵌入與檢索" } },
-            { id: "memory", title: { en: "Active Memory", ar: "الذاكرة النشطة", zh: "持久记忆", "zh-Hant": "持久記憶" } }
-          ]
-        },
-        {
-          category: { en: "Media & Intelligence", ar: "الوسائط والذكاء", zh: "多媒体与智能", "zh-Hant": "多媒體與智慧" },
-          items: [
-            { id: "image-generation", title: { en: "Image Generation", ar: "توليد الصور", zh: "图像生成", "zh-Hant": "圖像生成" } },
-            { id: "transcription", title: { en: "Audio Transcription", ar: "التفريغ الصوتي (Whisper)", zh: "语音转录", "zh-Hant": "語音轉錄" } },
-            { id: "pdf-import", title: { en: "PDF Document Import", ar: "استيراد وقراءة PDF", zh: "PDF 导入", "zh-Hant": "PDF 匯入" } }
-          ]
-        },
-        {
-          category: { en: "System & Data", ar: "النظام والبيانات", zh: "系统与数据", "zh-Hant": "系統與資料" },
-          items: [
-            { id: "import-export", title: { en: "Import & Export (.avro)", ar: "النسخ الاحتياطي (.avro)", zh: "数据导入导出", "zh-Hant": "資料匯入匯出" } },
-            { id: "conversations", title: { en: "Conversations Trees", ar: "إدارة المحادثات والتفرع", zh: "对话分支", "zh-Hant": "對話分支" } },
-            { id: "appearance", title: { en: "Appearance & Themes", ar: "المظهر والسمات الأحادية", zh: "外观与主题", "zh-Hant": "外觀與主題" } },
-            { id: "language", title: { en: "Languages", ar: "تعدد اللغات", zh: "语言设置", "zh-Hant": "語言設定" } },
-            { id: "title-generation", title: { en: "Title Generation", ar: "توليد العناوين التلقائي", zh: "标题生成", "zh-Hant": "標題生成" } },
-            { id: "proxy", title: { en: "Proxy & Network", ar: "البروكسي والشبكة", zh: "代理设置", "zh-Hant": "代理設定" } }
-          ]
-        }
-      ];
-
+      const NAV_STRUCTURE = [{"category":{"en":"Getting Started","ar":"البداية والإعداد","zh":"入门指南","zh-Hant":"入門指南"},"items":[{"id":"getting-started","title":{"en":"Quick Start Guide","ar":"دليل البدء السريع","zh":"快速上手","zh-Hant":"快速上手"}},{"id":"about","title":{"en":"About Avro","ar":"حول مشروع Avro","zh":"关于 Avro","zh-Hant":"關於 Avro"}},{"id":"faq","title":{"en":"Frequently Asked Questions","ar":"الأسئلة الشائعة","zh":"常见问题","zh-Hant":"常見問題"}},{"id":"privacy","title":{"en":"Privacy & Data Safety","ar":"الخصوصية وأمان البيانات","zh":"隐私与数据安全","zh-Hant":"隱私與資料安全"}}]},{"category":{"en":"Models & Providers","ar":"النماذج ومزودو الخدمة","zh":"模型与提供商","zh-Hant":"模型與供應商"},"items":[{"id":"provider","title":{"en":"AI Providers & APIs","ar":"مزودو الذكاء الاصطناعي","zh":"AI 提供商与密钥","zh-Hant":"AI 供應商與金鑰"}},{"id":"models","title":{"en":"Models & Architectures","ar":"النماذج والتهيئة","zh":"模型管理","zh-Hant":"模型管理"}},{"id":"local-model","title":{"en":"Local Offline Models","ar":"النماذج المحلية (دون إنترنت)","zh":"端侧本地模型","zh-Hant":"端側本地模型"}},{"id":"system-prompts","title":{"en":"System Prompts","ar":"التعليمات البرمجية الموجهة","zh":"系统提示词","zh-Hant":"系統提示词"}},{"id":"generation","title":{"en":"Generation Parameters","ar":"معايير التوليد والحرارة","zh":"生成参数调节","zh-Hant":"生成參數調節"}},{"id":"context","title":{"en":"Context & Token Window","ar":"نافذة السياق والتوكنز","zh":"上下文管理","zh-Hant":"上下文管理"}}]},{"category":{"en":"Tools & Extensibility","ar":"الأدوات والتكامل والـ MCP","zh":"工具与扩展集成","zh-Hant":"工具與擴充整合"},"items":[{"id":"tools","title":{"en":"Tools Ecosystem","ar":"بيئة الأدوات المدمجة","zh":"工具生态","zh-Hant":"工具生態"}},{"id":"mcp","title":{"en":"Model Context Protocol (MCP)","ar":"بروتوكول سياق النموذج (MCP)","zh":"MCP 协议与客户端","zh-Hant":"MCP 協定與客戶端"}},{"id":"skills","title":{"en":"Autonomous Agent Skills","ar":"مهارات الوكلاء المستقلين","zh":"Agent 技能体系","zh-Hant":"Agent 技能體系"}},{"id":"sandbox","title":{"en":"Isolated Execution Sandbox","ar":"بيئة التشغيل المعزولة (Sandbox)","zh":"隔离沙盒执行","zh-Hant":"隔離沙箱執行"}},{"id":"shell","title":{"en":"Shell & Terminal Commands","ar":"أوامر سطر الأوامر (Shell)","zh":"Shell 终端执行","zh-Hant":"Shell 終端執行"}},{"id":"automation","title":{"en":"Background Automations","ar":"الأتمتة والمهام المجدولة","zh":"后台自动化任务","zh-Hant":"後台自動化任務"}}]},{"category":{"en":"Search & Memory","ar":"البحث والذاكرة والتضمين","zh":"搜索、检索与记忆","zh-Hant":"搜尋、檢索與記憶"},"items":[{"id":"search","title":{"en":"Conversation Search","ar":"البحث في المحادثات","zh":"对话搜索","zh-Hant":"對話搜尋"}},{"id":"web-search","title":{"en":"Web Search","ar":"البحث في الويب","zh":"网络搜索","zh-Hant":"網路搜尋"}},{"id":"embedding","title":{"en":"Embedding & RAG","ar":"التضمين الشعاعي والـ RAG","zh":"嵌入与检索","zh-Hant":"嵌入與檢索"}},{"id":"memory","title":{"en":"Active Memory","ar":"الذاكرة النشطة","zh":"持久记忆","zh-Hant":"持久記憶"}}]},{"category":{"en":"Media & Intelligence","ar":"الوسائط والذكاء","zh":"多媒体与智能","zh-Hant":"多媒體與智慧"},"items":[{"id":"image-generation","title":{"en":"Image Generation","ar":"توليد الصور","zh":"图像生成","zh-Hant":"圖像生成"}},{"id":"transcription","title":{"en":"Audio Transcription","ar":"التفريغ الصوتي (Whisper)","zh":"语音转录","zh-Hant":"語音轉錄"}},{"id":"pdf-import","title":{"en":"PDF Document Import","ar":"استيراد وقراءة PDF","zh":"PDF 导入","zh-Hant":"PDF 匯入"}}]},{"category":{"en":"System & Data","ar":"النظام والبيانات","zh":"系统与数据","zh-Hant":"系統與資料"},"items":[{"id":"import-export","title":{"en":"Import & Export (.avro)","ar":"النسخ الاحتياطي (.avro)","zh":"数据导入导出","zh-Hant":"資料匯入匯出"}},{"id":"conversations","title":{"en":"Conversations Trees","ar":"إدارة المحادثات والتفرع","zh":"对话分支","zh-Hant":"對話分支"}},{"id":"appearance","title":{"en":"Appearance & Themes","ar":"المظهر والسمات الأحادية","zh":"外观与主题","zh-Hant":"外觀與主題"}},{"id":"language","title":{"en":"Languages","ar":"تعدد اللغات","zh":"语言设置","zh-Hant":"語言設定"}},{"id":"title-generation","title":{"en":"Title Generation","ar":"توليد العناوين التلقائي","zh":"标题生成","zh-Hant":"標題生成"}},{"id":"proxy","title":{"en":"Proxy & Network","ar":"البروكسي والشبكة","zh":"代理设置","zh-Hant":"代理設定"}}]}];
       let currentLang = "ar";
       let currentDoc = "index";
 
       function parseRoute() {
         const path = window.location.pathname.replace(/^\/docs\/?/, "");
         const parts = path.split("/").filter(Boolean);
-        
-        const params = new URLSearchParams(window.location.search);
-        const qLang = params.get("lang");
-        const qDoc = params.get("doc");
-
         if (parts.length >= 2) {
           currentLang = parts[0];
-          currentDoc = parts[1].replace(/\.md$/, "");
+          currentDoc = parts[1].replace(/\.(md|html)$/, "");
         } else if (parts.length === 1) {
           if (["ar", "en", "zh", "zh-Hant"].includes(parts[0])) {
             currentLang = parts[0];
             currentDoc = "index";
           } else {
-            currentDoc = parts[0].replace(/\.md$/, "");
+            currentDoc = parts[0].replace(/\.(md|html)$/, "");
           }
         }
-
-        if (qLang) currentLang = qLang;
-        if (qDoc) currentDoc = qDoc.replace(/\.md$/, "");
-
         if (!["ar", "en", "zh", "zh-Hant"].includes(currentLang)) {
           currentLang = "ar";
+        }
+        if (!currentDoc) {
+          currentDoc = "index";
         }
       }
 
@@ -694,7 +687,8 @@
         const isRtl = currentLang === "ar";
         document.documentElement.setAttribute("dir", isRtl ? "rtl" : "ltr");
         document.documentElement.setAttribute("lang", currentLang);
-        document.getElementById("langSelect").value = currentLang;
+        const langEl = document.getElementById("langSelect");
+        if (langEl) langEl.value = currentLang;
       }
 
       function renderNav() {
@@ -727,8 +721,10 @@
 
       async function loadDoc(docId) {
         currentDoc = docId;
-        const stateUrl = "/docs/" + currentLang + "/" + docId;
-        window.history.pushState({ lang: currentLang, doc: docId }, "", stateUrl);
+        const targetUrl = "/docs/" + currentLang + "/" + docId;
+        if (window.location.pathname !== targetUrl && window.location.pathname !== targetUrl + "/") {
+          window.history.pushState({ lang: currentLang, doc: docId }, "", targetUrl);
+        }
 
         document.querySelectorAll(".nav-item").forEach(el => {
           el.classList.toggle("active", el.getAttribute("href").endsWith("/" + docId));
@@ -739,12 +735,13 @@
           (currentLang === "ar" ? "جارٍ تحميل المستند..." : "Loading document...") + '</div>';
 
         const filePath = "/docs/content/" + currentLang + "/" + docId + ".md";
-
         try {
           const res = await fetch(filePath);
           if (!res.ok) throw new Error("File not found");
           const md = await res.text();
           docBody.innerHTML = marked.parse(md);
+          docBody.setAttribute("data-loaded-doc", docId);
+          docBody.setAttribute("data-loaded-lang", currentLang);
           document.querySelectorAll("pre code").forEach(el => {
             hljs.highlightElement(el);
           });
@@ -757,42 +754,51 @@
         }
       }
 
-      document.getElementById("langSelect").addEventListener("change", (e) => {
-        currentLang = e.target.value;
-        updateDirection();
-        renderNav();
-        loadDoc(currentDoc);
-      });
+      const langSelect = document.getElementById("langSelect");
+      if (langSelect) {
+        langSelect.addEventListener("change", (e) => {
+          const newLang = e.target.value;
+          window.location.href = "/docs/" + newLang + "/" + currentDoc;
+        });
+      }
 
       const themeToggle = document.getElementById("themeToggle");
-      themeToggle.addEventListener("click", () => {
-        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-        const nextTheme = isDark ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", nextTheme);
-        localStorage.setItem("avro_theme", nextTheme);
-        
-        const hljsLink = document.getElementById("hljsTheme");
-        if (hljsLink) {
-          hljsLink.href = nextTheme === "dark" 
-            ? "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css"
-            : "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
-        }
-      });
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+          const nextTheme = isDark ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", nextTheme);
+          localStorage.setItem("avro_theme", nextTheme);
+          
+          const hljsLink = document.getElementById("hljsTheme");
+          if (hljsLink) {
+            hljsLink.href = nextTheme === "dark" 
+              ? "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css"
+              : "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css";
+          }
+        });
+      }
 
       const savedTheme = localStorage.getItem("avro_theme") || "dark";
       document.documentElement.setAttribute("data-theme", savedTheme);
 
-      document.getElementById("menuToggle").addEventListener("click", () => {
-        document.getElementById("sidebar").classList.toggle("open");
-      });
-
-      document.getElementById("searchInput").addEventListener("input", (e) => {
-        const q = e.target.value.toLowerCase().trim();
-        document.querySelectorAll(".nav-item").forEach(item => {
-          const match = item.textContent.toLowerCase().includes(q);
-          item.style.display = match ? "block" : "none";
+      const menuToggle = document.getElementById("menuToggle");
+      if (menuToggle) {
+        menuToggle.addEventListener("click", () => {
+          document.getElementById("sidebar").classList.toggle("open");
         });
-      });
+      }
+
+      const searchInput = document.getElementById("searchInput");
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          const q = e.target.value.toLowerCase().trim();
+          document.querySelectorAll(".nav-item").forEach(item => {
+            const match = item.textContent.toLowerCase().includes(q);
+            item.style.display = match ? "block" : "none";
+          });
+        });
+      }
 
       window.addEventListener("popstate", () => {
         parseRoute();
@@ -801,10 +807,10 @@
         loadDoc(currentDoc);
       });
 
-      parseRoute();
-      updateDirection();
-      renderNav();
-      loadDoc(currentDoc);
+      // Highlight syntax for pre-rendered content
+      document.querySelectorAll("pre code").forEach(el => {
+        hljs.highlightElement(el);
+      });
     </script>
   </body>
 </html>
