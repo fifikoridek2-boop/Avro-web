@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    {
+      "src": "^/api/(.*)$",
+      "dest": "/api/$1.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Accept"
+      }
+    },
+    {
+      "src": "^/docs/content/(.*)$",
+      "dest": "/docs/content/$1"
+    },
+    {
+      "src": "^/docs/(.*)$",
+      "dest": "/docs/index.html"
+    },
+    {
+      "src": "^/docs$",
+      "dest": "/docs/index.html"
+    },
+    {
+      "src": "^/(.*)$",
+      "dest": "/$1"
+    }
+  ]
+}

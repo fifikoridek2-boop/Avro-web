@@ -1,0 +1,1184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Avro</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 768 768'%3E%3Cg transform='translate(-34 -17)'%3E%3Cpath d='M201.8 589.6L402.6 202.1L634.5 600.6' fill='none' stroke='%23000' stroke-width='144.01' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ==========================================================================
+         AVRO LANDING — STYLES
+         1. Design tokens (desktop)      4. Buttons
+         2. Mobile token overrides       5. Scroll story (scenes)
+         3. Base + site chrome           6. Pager + footer
+         7. Mobile component overrides
+         Every layout number lives in a token. Mobile only re-declares tokens,
+         so components never repeat themselves inside the media query.
+         ========================================================================== */
+
+      /* 1 · TOKENS ------------------------------------------------------------- */
+      :root {
+        /* palette */
+        --ink: #000;
+        --primary: #000;
+        --primary-dark: #2a2a2a;
+        --accent: #d4d4d4;
+        --surface: #fff;
+        --muted: #474747;
+        --sub: #c6c6c6;
+        --line: #a8a8a8;
+        --h1-sub: #3b3b3b;
+        --pill-bg: #e8e8e8;
+        --pill-ink: #1b1b1b;
+        --glass: rgba(238, 238, 238, 0.66);
+        --glass-edge: rgba(255, 255, 255, 0.36);
+
+        /* scroll story */
+        --scroll-length: 3780px; /* keep in sync with TRACK in the script when changed */
+        --grid-step: 34px;
+        --sl: 52.01vw; /* x of the big surface's left edge */
+
+        /* header / footer chrome */
+        --chrome-top: 16px;
+        --chrome-side: 24px;
+        --chrome-h: 80px;
+        --chrome-pad: 0 19px 0 33px;
+        --logo-h: 30px;
+        --nav-gap: 29px;
+        --nav-size: 15px;
+        --foot-pad: 24px;
+        --foot-h: 80px;
+        --foot-inline: 33px;
+        --foot-gap: 28px;
+        --foot-size: 14px;
+
+        /* buttons */
+        --btn-sm-h: 44px;
+        --btn-sm-pad: 0 20px;
+        --btn-lg-h: 63px;
+        --btn-lg-pad: 0 28px;
+        --btn-lg-size: 18px;
+        --btn-lg-gap: 14px;
+        --btn-ac-h: 62px;
+        --btn-ac-pad: 0 28px;
+        --btn-ac-size: 18px;
+        --link-size: 18px;
+
+        /* copy blocks (overridden per scene) */
+        --copy-x: 120px;
+        --copy-y: 296px;
+        --copy-w: 560px;
+        --lead-size: 21px;
+        --lead-gap: 22px 0 37px;
+        --h1-size: 8.671vw;
+        --h2-size: 5.8vw;
+
+        /* intro: surface, clock, toolbar, guide lines */
+        --surface-top: 243px;
+        --surface-w: 1296px;
+        --surface-h: 972px;
+        --surface-r: 103.68px;
+        --time-h: 156px;
+        --time-pad: 89px;
+        --time-size: 60.48px;
+        --tb-x: calc(var(--sl) + 45px);
+        --tb-y: 399px;
+        --tb-w: 391px;
+        --tb-h: 155px;
+        --tb-pad: 57px;
+        --tb-gap: 56px;
+        --tb-logo-h: 48px;
+        --bars-w: 58px;
+        --bars-h: 35px;
+        --bar-h: 5px;
+        --guide-x1: var(--sl);
+        --guide-x2: calc(var(--sl) + 45px);
+        --guide-x3: calc(var(--sl) + 436px);
+        --guide-y0: var(--surface-top);
+        --guide-y1: var(--tb-y);
+        --guide-y2: 554px;
+
+        /* models scene */
+        --art-x: 760px;
+        --art-y: 242px;
+        --art-w: 560px;
+        --art-h: 456px;
+        --stack-w: 340px;
+        --pill-h: 80px;
+        --pill-gap: 14px;
+        --pill-size: 23.76px;
+        --dot-size: 17px;
+        --prov-x: 383px;
+        --prov-y: 228px;
+        --prov-h: 50px;
+        --prov-size: 37.44px;
+
+        /* tools scene */
+        --tool-dot-x: 824px;
+        --tool-dot-y: 256px;
+        --drow-h: 85px;
+        --drow-icon: 34px;
+        --res-x: 1003px;
+        --res-size: 15.84px;
+        --res-lh: 24px;
+        --cmd-x: 421px;
+        --cmd-y: 606px;
+        --cmd-size: 18.72px;
+        --cmd-lh: 28px;
+
+        /* pager */
+        --pager-bottom: 18px;
+        --pager-h: 44px;
+        --pager-pad: 0;
+      }
+
+      /* 2 · MOBILE OVERRIDES (breakpoint mirrored by BREAKPOINT in the script) -- */
+      @media (max-width: 760px) {
+        :root {
+          --scroll-length: 3545px;
+          --sl: 137px;
+
+          --chrome-top: 12px;
+          --chrome-side: 14px;
+          --chrome-h: 68px;
+          --chrome-pad: 0 9px 0 20px;
+          --logo-h: 25px;
+          --nav-gap: 14px;
+          --nav-size: 14px;
+          --foot-pad: 15px;
+          --foot-h: 70px;
+          --foot-inline: 20px;
+          --foot-gap: 16px;
+          --foot-size: 13px;
+
+          --btn-sm-h: 42px;
+          --btn-sm-pad: 0 14px;
+          --btn-lg-h: 54px;
+          --btn-lg-pad: 0 24px;
+          --btn-lg-size: 16px;
+          --btn-lg-gap: 12px;
+          --btn-ac-h: 54px;
+          --btn-ac-pad: 0 24px;
+          --btn-ac-size: 16px;
+          --link-size: 16px;
+
+          --copy-x: 24px;
+          --copy-w: 342px;
+          --lead-size: 17px;
+          --lead-gap: 18px 0 20px;
+          --h1-size: 15.78vw;
+          --h2-size: 12.31vw;
+
+          --surface-top: 582px;
+          --surface-w: 780px;
+          --surface-h: 684px;
+          --surface-r: 62.4px;
+          --time-h: 94px;
+          --time-pad: 53px;
+          --time-size: 36.4px;
+          --tb-x: 164px;
+          --tb-y: 676px;
+          --tb-w: 240px;
+          --tb-h: 94px;
+          --tb-pad: 35px;
+          --tb-gap: 33px;
+          --tb-logo-h: 30px;
+          --bars-w: 35px;
+          --bars-h: 22px;
+          --bar-h: 4px;
+          --guide-x3: 404px;
+          --guide-y2: 769px;
+
+          --art-x: 24px;
+          --art-y: 438px;
+          --art-w: 342px;
+          --art-h: 271px;
+          --stack-w: 219px;
+          --pill-h: 47px;
+          --pill-gap: 9px;
+          --pill-size: 15px;
+          --dot-size: 13px;
+          --prov-x: 239px;
+          --prov-y: 135px;
+          --prov-h: 30px;
+          --prov-size: 22px;
+
+          --tool-dot-x: 68px;
+          --tool-dot-y: 401px;
+          --drow-h: 58px;
+          --drow-icon: 26px;
+          --res-x: 189px;
+          --res-size: 15px;
+          --res-lh: 22px;
+          --cmd-x: 24px;
+          --cmd-y: 361px;
+          --cmd-size: 14px;
+          --cmd-lh: 22px;
+
+          --pager-bottom: 15px;
+          --pager-h: 50px;
+          --pager-pad: 0 21px;
+        }
+      }
+
+      /* 3 · BASE + SITE CHROME ------------------------------------------------- */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html {
+        background: var(--surface);
+      }
+      body {
+        font-family: Outfit, system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--surface);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .sprite {
+        position: absolute;
+        width: 0;
+        height: 0;
+      }
+      .icon {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.5;
+      }
+      .icon--download {
+        stroke-width: 2;
+        stroke-linecap: round;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        color: #000;
+      }
+      .logo {
+        display: block;
+        height: var(--logo-h);
+        width: auto;
+        fill: currentColor;
+      }
+
+      /* glass pill used by both header and footer */
+      .site-header,
+      .site-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 999px;
+        background: var(--glass);
+        border: 1px solid var(--glass-edge);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+      .site-header {
+        position: fixed;
+        z-index: 50;
+        top: var(--chrome-top);
+        left: var(--chrome-side);
+        right: var(--chrome-side);
+        height: var(--chrome-h);
+        padding: var(--chrome-pad);
+      }
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: var(--nav-gap);
+        font-size: var(--nav-size);
+      }
+      .site-footer {
+        height: var(--foot-h);
+        padding: 0 var(--foot-inline);
+      }
+      .site-footer__links {
+        display: flex;
+        gap: var(--foot-gap);
+        font-size: var(--foot-size);
+      }
+
+      /* 4 · BUTTONS ------------------------------------------------------------ */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--primary);
+        color: var(--surface);
+        border-radius: 999px;
+        font-weight: 500;
+        transition:
+          transform 0.2s ease,
+          background-color 0.2s ease;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        background: var(--primary-dark);
+      }
+      .btn--sm {
+        height: var(--btn-sm-h);
+        padding: var(--btn-sm-pad);
+        font-size: 14px;
+        gap: 12px;
+      }
+      .btn--lg {
+        height: var(--btn-lg-h);
+        padding: var(--btn-lg-pad);
+        font-size: var(--btn-lg-size);
+        gap: var(--btn-lg-gap);
+      }
+      .btn--light {
+        background: #fff;
+        color: #000;
+        height: var(--btn-ac-h);
+        padding: var(--btn-ac-pad);
+        font-size: var(--btn-ac-size);
+      }
+      .btn--light:hover {
+        background: #e8e8e8;
+      }
+      .link {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        font-size: var(--link-size);
+        font-weight: 500;
+      }
+
+      /* 5 · SCROLL STORY ------------------------------------------------------- */
+      .story {
+        position: relative;
+        height: calc(100vh + var(--scroll-length));
+      }
+      .stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* dotted background (parallax-shifted by the script) */
+      .dot-grid {
+        --dot: var(--primary);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -200px;
+        height: calc(100% + 400px);
+        opacity: 0.3;
+        background: radial-gradient(
+            circle at calc(var(--grid-step) / 2) calc(var(--grid-step) / 2),
+            var(--dot) 0,
+            var(--dot) 1px,
+            transparent 1.2px
+          )
+          0 0 / var(--grid-step) var(--grid-step);
+        will-change: transform;
+      }
+      .scene--tools .dot-grid {
+        --dot: var(--surface);
+      }
+
+      /* text block shared by every scene */
+      .copy {
+        position: absolute;
+        left: var(--copy-x);
+        top: var(--copy-y);
+        width: var(--copy-w);
+        will-change: transform;
+      }
+      h1,
+      h2 {
+        font-weight: 600;
+        white-space: nowrap;
+        line-height: 1.04;
+        letter-spacing: -0.045em;
+      }
+      h1 {
+        font-size: var(--h1-size);
+      }
+      h1 span {
+        display: block;
+        color: var(--h1-sub);
+      }
+      h2 {
+        font-size: var(--h2-size);
+      }
+      .lead {
+        font-size: var(--lead-size);
+        line-height: 1.6;
+        color: var(--muted);
+        margin: var(--lead-gap);
+      }
+
+      @keyframes arrive {
+        from { opacity: 0; translate: 0 24px; }
+        to { opacity: 1; translate: 0 0; }
+      }
+      @keyframes rise {
+        from { opacity: 0; translate: 0 12vh; }
+        to { opacity: 1; translate: 0 0; }
+      }
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      /* — scene 1 · intro — */
+      .scene--intro {
+        --copy-x: 80px;
+        --copy-y: 255px;
+        --copy-w: 581px;
+        --lead-size: 21.6px;
+        --lead-gap: 29px 0 32px;
+      }
+      .scene--intro .copy {
+        z-index: 3;
+        animation: arrive 0.9s 0.1s ease both;
+      }
+      .guide {
+        position: absolute;
+        z-index: 2;
+        background: var(--line);
+        opacity: 0.3;
+        pointer-events: none;
+        will-change: transform;
+      }
+      .guide--v {
+        left: var(--at);
+        top: -200px;
+        bottom: -200px;
+        width: 1px;
+      }
+      .guide--h {
+        top: var(--at);
+        left: 0;
+        right: 0;
+        height: 1px;
+      }
+      .surface {
+        position: absolute;
+        left: var(--sl);
+        top: var(--surface-top);
+        width: var(--surface-w);
+        height: var(--surface-h);
+        background: var(--primary);
+        border-radius: var(--surface-r) 0 0 0;
+        animation: rise 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        will-change: transform;
+      }
+      .clock {
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: var(--time-h);
+        padding-left: var(--time-pad);
+        display: flex;
+        align-items: center;
+        font-size: var(--time-size);
+        font-weight: 700;
+        color: var(--surface);
+        will-change: transform, opacity;
+      }
+      .toolbar {
+        position: absolute;
+        z-index: 1;
+        left: var(--tb-x);
+        top: var(--tb-y);
+        width: var(--tb-w);
+        height: var(--tb-h);
+        padding-left: var(--tb-pad);
+        gap: var(--tb-gap);
+        display: flex;
+        align-items: center;
+        border-radius: 999px;
+        background: var(--primary-dark);
+        color: #fff;
+        animation: rise 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        will-change: transform;
+      }
+      .toolbar .logo {
+        height: var(--tb-logo-h);
+        color: #fff;
+      }
+      .bars {
+        width: var(--bars-w);
+        height: var(--bars-h);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .bars i {
+        height: var(--bar-h);
+        border-radius: 3px;
+        background: var(--surface);
+      }
+
+      /* — scene 2 · models — */
+      .scene--models {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .art {
+        position: absolute;
+        left: var(--art-x);
+        top: var(--art-y);
+        width: var(--art-w);
+        height: var(--art-h);
+        will-change: transform;
+      }
+      .stack {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--stack-w);
+      }
+      .pill {
+        --mix: calc(var(--q, 0) * var(--q, 0) * 100%); /* highlight strength, set by script */
+        height: var(--pill-h);
+        margin: 0 auto var(--pill-gap);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        font-size: var(--pill-size);
+        white-space: nowrap;
+        background: color-mix(in srgb, var(--primary) var(--mix), var(--pill-bg));
+        color: color-mix(in srgb, var(--surface) var(--mix), var(--pill-ink));
+      }
+      .dot {
+        position: absolute;
+        width: var(--dot-size);
+        height: var(--dot-size);
+        border-radius: 50%;
+        background: var(--primary);
+        will-change: transform;
+      }
+      .art .dot {
+        left: -29px;
+        top: 31.65px;
+      }
+      .provider {
+        position: absolute;
+        left: var(--prov-x);
+        top: var(--prov-y);
+        height: var(--prov-h);
+        transform: translateY(-50%);
+        font-size: var(--prov-size);
+        font-weight: 600;
+        letter-spacing: -0.035em;
+        color: var(--primary);
+        white-space: nowrap;
+      }
+      .provider span {
+        display: inline-block;
+        animation: fade-in 0.4s ease both;
+      }
+
+      /* — scene 3 · tools (revealed by clip-path) — */
+      .scene--tools {
+        z-index: 3;
+        background: var(--primary);
+        color: var(--surface);
+        clip-path: inset(100% 0 0 0 round 80px 80px 0 0);
+      }
+      .scene--tools h2 {
+        color: var(--surface);
+      }
+      .scene--tools .lead {
+        color: var(--sub);
+      }
+      .scene--tools .dot {
+        background: var(--surface);
+        left: var(--tool-dot-x);
+        top: var(--tool-dot-y);
+      }
+      .device-row {
+        --q: 0; /* proximity to the dot, set by script */
+        position: absolute;
+        height: var(--drow-h);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        color: var(--ink);
+        background: color-mix(in srgb, var(--accent) calc(100% - 25% * var(--q)), var(--primary));
+      }
+      .device-row svg {
+        width: var(--drow-icon);
+        height: var(--drow-icon);
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .mono {
+        position: absolute;
+        white-space: pre;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--surface);
+      }
+      .mono--result {
+        left: var(--res-x);
+        font-size: var(--res-size);
+        line-height: var(--res-lh);
+      }
+      .mono--command {
+        left: var(--cmd-x);
+        top: var(--cmd-y);
+        font-size: var(--cmd-size);
+        line-height: var(--cmd-lh);
+      }
+      .mono--command i {
+        font-style: normal;
+      }
+
+      /* 6 · PAGER + FOOTER ----------------------------------------------------- */
+      .pager {
+        position: absolute;
+        z-index: 6;
+        left: 50%;
+        bottom: var(--pager-bottom);
+        height: var(--pager-h);
+        padding: var(--pager-pad);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transform: translateX(-50%);
+        border-radius: 999px;
+        background: transparent;
+      }
+      .pager a {
+        width: 6px;
+        height: 6px;
+        border-radius: 99px;
+        background: var(--primary);
+        opacity: 0.3;
+        transition:
+          opacity 0.22s ease,
+          width 0.22s ease,
+          background-color 0.3s;
+      }
+      .pager a.on {
+        width: 22px;
+        opacity: 1;
+      }
+      .pager.is-light a {
+        background: var(--surface);
+      }
+      .foot-wrap {
+        padding: var(--foot-pad);
+        background:
+          radial-gradient(
+              circle at calc(var(--grid-step) / 2) calc(var(--grid-step) / 2),
+              rgba(255, 255, 255, 0.3) 0,
+              rgba(255, 255, 255, 0.3) 1px,
+              transparent 1.2px
+            )
+            0 calc(-360px - 100vh) / var(--grid-step) var(--grid-step),
+          var(--primary);
+      }
+
+      /* 7 · MOBILE COMPONENT OVERRIDES (must stay last so they win over base rules) */
+      @media (max-width: 760px) {
+        .scene--intro {
+          --copy-x: 24px;
+          --copy-y: 214px;
+          --copy-w: 342px;
+          --lead-size: 17px;
+          --lead-gap: 25px 0 25px;
+        }
+        .scene--models { --copy-y: 170px; }
+        .scene--tools { --copy-y: 90px; }
+        .btn--sm .icon { display: none; }
+        .pager { background: var(--glass); }
+        .pager.is-flat { background: transparent; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Shared SVG symbols: logo + icons, referenced with <use> -->
+    <svg class="sprite" aria-hidden="true">
+      <symbol id="logo-avro" viewBox="70 70 1941 662">
+        <title>Avro</title>
+        <path d="M264.50 312.13L338.68 168.99A72.01 72.01 0 0 1 464.85 165.90L696.74 564.41A72.01 72.01 0 0 1 572.26 636.84L406.26 351.57L392.36 378.39Z" />
+        <path d="M245.43 348.93L137.90 556.43A72.01 72.00 0 0 0 265.76 622.69L373.29 415.19Z" />
+        <path d="M914.9 672.0 756.8 298.9H883.4L990.9 609.0H936.4L1043.1 298.9H1167.5L1010.1 672.0Z" />
+        <path d="M1210.5 672.0V298.9H1327.2V672.0ZM1327.2 466.3 1277.3 429.4Q1291.9 362.6 1326.8 326.9Q1361.7 291.2 1422.4 291.2Q1450.0 291.2 1470.3 298.9Q1490.7 306.6 1506.0 324.2L1437.0 412.5Q1429.3 404.1 1417.8 399.8Q1406.2 395.6 1391.7 395.6Q1361.7 395.6 1344.4 413.3Q1327.2 430.9 1327.2 466.3Z" />
+        <path d="M1729.9 680.4Q1671.1 680.4 1625.0 654.7Q1579.0 629.0 1552.1 584.3Q1525.2 539.5 1525.2 484.1Q1525.2 429.4 1552.1 385.6Q1579.0 341.9 1625.0 316.2Q1671.1 290.5 1730.2 290.5Q1787.3 290.5 1834.0 315.8Q1880.7 341.1 1907.6 385.3Q1934.4 429.4 1934.4 484.7Q1934.4 539.6 1907.6 583.9Q1880.7 628.2 1834.2 654.3Q1787.8 680.4 1729.9 680.4ZM1729.7 573.0Q1754.5 573.0 1773.9 561.8Q1793.2 550.7 1803.9 531.1Q1814.7 511.5 1814.7 485.1Q1814.7 459.2 1803.2 438.9Q1791.6 418.7 1773.0 407.9Q1754.5 397.2 1730.2 397.2Q1704.9 397.2 1686.1 408.3Q1667.3 419.4 1656.1 439.4Q1645.0 459.3 1645.0 484.8Q1645.0 510.8 1656.1 530.7Q1667.3 550.7 1686.1 561.8Q1704.9 573.0 1729.7 573.0Z" />
+      </symbol>
+      <symbol id="icon-arrow" viewBox="0 0 12 12"><path d="M2 10 10 2M4 2h6v6" /></symbol>
+      <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 4v11m-5-4 5 5 5-5M5 20h14" /></symbol>
+    </svg>
+
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Avro home">
+        <svg class="logo" viewBox="70 70 1941 662" role="img" aria-label="Avro"><use href="#logo-avro" /></svg>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/docs/">Docs</a>
+        <a href="https://github.com/fifikoridek2-boop/Avro" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn--sm" href="https://github.com/fifikoridek2-boop/Avro/releases/latest" target="_blank" rel="noopener">
+          Get Avro
+          <svg class="icon" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><use href="#icon-arrow" /></svg>
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="story" data-ref="story">
+        <div class="stage">
+          <div class="dot-grid" data-parallax aria-hidden="true"></div>
+
+          <!-- Scene 1 · intro -->
+          <section class="scene scene--intro" data-ref="intro" aria-labelledby="intro-title">
+            <div class="surface" data-follow="surface" aria-hidden="true">
+              <span class="clock" data-ref="clock">09:12</span>
+            </div>
+            <div class="toolbar" data-follow="toolbar" aria-hidden="true">
+              <div class="bars"><i></i><i></i><i></i></div>
+              <svg class="logo" viewBox="70 70 1941 662"><use href="#logo-avro" /></svg>
+            </div>
+            <span class="guide guide--v" style="--at: var(--guide-x1)" aria-hidden="true"></span>
+            <span class="guide guide--v" style="--at: var(--guide-x2)" aria-hidden="true"></span>
+            <span class="guide guide--v" style="--at: var(--guide-x3)" aria-hidden="true"></span>
+            <span class="guide guide--h" data-follow="surface" style="--at: var(--guide-y0)" aria-hidden="true"></span>
+            <span class="guide guide--h" data-follow="toolbar" style="--at: var(--guide-y1)" aria-hidden="true"></span>
+            <span class="guide guide--h" data-follow="toolbar" style="--at: var(--guide-y2)" aria-hidden="true"></span>
+            <div class="copy" data-ref="intro-copy">
+              <h1 id="intro-title">Write. Run.<span>Connect.</span></h1>
+              <p class="lead">Pick a provider. Add your key.<br />Avro does the rest.</p>
+              <a class="btn btn--lg" href="https://github.com/fifikoridek2-boop/Avro/releases/latest" target="_blank" rel="noopener">
+                <svg class="icon icon--download" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-download" /></svg>
+                Download Avro
+              </a>
+            </div>
+          </section>
+
+          <!-- Scene 2 · models -->
+          <section class="scene scene--models" data-ref="models" aria-labelledby="models-title">
+            <div class="copy" data-ref="models-copy">
+              <h2 id="models-title">Any provider.<br />One app.</h2>
+              <p class="lead">Pick a provider and add your key,<br />or connect your account.</p>
+              <a class="link" href="/docs/en/provider">
+                Explore providers
+                <svg class="icon" width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"><use href="#icon-arrow" /></svg>
+              </a>
+            </div>
+            <figure class="art" data-ref="art">
+              <div class="stack" data-ref="stack"></div>
+              <i class="dot" data-ref="model-dot"></i>
+              <div class="provider" data-ref="provider" aria-live="polite"></div>
+            </figure>
+          </section>
+
+          <!-- Scene 3 · tools -->
+          <section class="scene scene--tools" data-ref="tools" aria-labelledby="tools-title">
+            <div class="dot-grid" data-parallax aria-hidden="true"></div>
+            <div class="copy">
+              <h2 id="tools-title">Connect to<br />any tool.</h2>
+              <p class="lead">Your servers. Your laptop.<br />A conversation away.</p>
+              <a class="btn btn--light" href="/docs/en/tools">
+                Connect a tool
+                <svg class="icon" width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"><use href="#icon-arrow" /></svg>
+              </a>
+            </div>
+            <div data-ref="device-rows" aria-hidden="true"></div>
+            <i class="dot" data-ref="tool-dot" aria-hidden="true"></i>
+            <code class="mono mono--command" data-ref="command" aria-hidden="true"></code>
+          </section>
+
+          <nav class="pager" data-ref="pager" aria-label="Sections">
+            <a href="#" class="on" aria-label="Intro"></a>
+            <a href="#" aria-label="Providers"></a>
+            <a href="#" aria-label="Tools"></a>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <div class="foot-wrap">
+      <footer class="site-footer">
+        <a class="brand" href="/" aria-label="Avro home">
+          <svg class="logo" viewBox="70 70 1941 662" role="img" aria-label="Avro"><use href="#logo-avro" /></svg>
+        </a>
+        <nav class="site-footer__links" aria-label="Footer">
+          <a href="https://github.com/fifikoridek2-boop/Avro" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="/docs/">Docs ↗</a>
+          <a href="/docs/en/privacy">Privacy</a>
+        </nav>
+      </footer>
+    </div>
+
+    <script>
+      /* ==========================================================================
+         AVRO LANDING — SCROLL STORY
+         1. Math helpers   4. DOM setup        7. Scroll controller
+         2. Content        5. Scene renderers
+         3. Layout config  6. render()
+         The page scrolls through a virtual "track" of TRACK units. Each scene
+         is a pure function of the current track position `y`.
+         ========================================================================== */
+      (() => {
+        "use strict";
+
+        /* 1 · MATH HELPERS ---------------------------------------------------- */
+        const clamp = (v, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
+        const smoothstep = (a, b, y) => {
+          const p = clamp((y - a) / (b - a));
+          return p * p * (3 - 2 * p);
+        };
+        const smootherstep = (p) => {
+          p = clamp(p);
+          return p * p * p * (p * (6 * p - 15) + 10);
+        };
+        /** Linear interpolation over keyframes [[y, a, b…], …]; `col` picks the value column. */
+        const sample = (keys, y, col = 1) => {
+          if (y <= keys[0][0]) return keys[0][col];
+          for (let i = 1; i < keys.length; i++) {
+            if (y <= keys[i][0]) {
+              const [y0, ...from] = keys[i - 1];
+              const [y1, ...to] = keys[i];
+              const p = (y - y0) / (y1 - y0);
+              return from[col - 1] + (to[col - 1] - from[col - 1]) * p;
+            }
+          }
+          return keys[keys.length - 1][col];
+        };
+        const stretchKeys = (keys, k) => keys.map(([y, ...v]) => [y * k, ...v]);
+
+        /* 2 · CONTENT --------------------------------------------------------- */
+        const MODELS = ["GPT 5.6 Sol", "GPT 5.6 Terra", "Gemini 3.1 Pro", "Claude Opus 5", "Claude Sonnet 5"];
+        const PROVIDERS = ["OpenAI", "Google", "Anthropic"];
+        const DEVICES = [
+          { // server
+            icon: '<rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/>',
+            command: "uptime -p",
+            result: "up 42 days",
+          },
+          { // phone
+            icon: '<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M12 18h.01"/>',
+            command: "termux-battery-status",
+            result: '"percentage": 86',
+          },
+          { // desktop
+            icon: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
+            command: "nvidia-smi -L",
+            result: "GPU 0: NVIDIA RTX 5090",
+          },
+          { // laptop
+            icon: '<rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 20h20"/>',
+            command: "git status",
+            result: "On branch master",
+          },
+        ];
+
+        /* 3 · LAYOUT CONFIG ----------------------------------------------------
+           TRACK            total virtual scroll length (desktop units)
+           BEATS            scroll positions where scenes change
+           LAYOUTS.*        per-breakpoint motion data:
+             pill           {pitch, width, grow}   stacked model pills
+             dotPath        [[y, dotY]]            model dot travel
+             providerSplit  [dotY, dotY]           dotY where the provider label changes
+             toolDot        [[y, x, y]]            tool dot travel
+             rows           device-row geometry
+             typeAt/resultAt/fadeAt   per-device y for typing, result and fade-out
+             surfaceShift / copyShift / toolbarShift   intro lift distances (px) */
+        const TRACK = 3780;
+        const Y_MAX = 3900;
+        const BREAKPOINT = 760; // mirrors the CSS media query
+        const GRID_PARALLAX = 0.04233;
+        const RESULT_BASELINE = 12;
+        const MOBILE_STRETCH = TRACK / 3545; // mobile keyframes were authored on a 3545 track
+
+        const BEATS = {
+          introLift: 1056,
+          toolbarLift: [48, 880],
+          introFade: [710, 1000],
+          modelsIn: [830, 1230],
+          modelsOut: [2440, 2800],
+          modelsDrift: 850,
+          modelsDriftSpan: 360,
+          toolsReveal: [2505, 2900],
+          pagerModels: 1000,
+          pagerTools: 2700,
+          pagerTargets: [0, 1500, 3100],
+        };
+
+        const LAYOUTS = {
+          desktop: {
+            pill: { pitch: 94, width: 272, grow: 60 },
+            surfaceShift: -81,
+            copyShift: -54,
+            toolbarShift: 64.8,
+            dotPath: [
+              [0, 0], [1248, 0], [1344, 24.3], [1440, 82], [1536, 94.6], [1632, 132.9], [1728, 183.7],
+              [1824, 192.1], [1920, 242.4], [2016, 281.3], [2112, 293.6], [2208, 351], [2304, 376],
+            ],
+            providerSplit: [100, 196],
+            toolDot: [
+              [0, -262, 355.4], [2880, -262, 355.4], [2940, -207.6, 355.4], [3000, -169.3, 207.1],
+              [3060, -133.4, 43], [3120, -57.3, 43], [3180, -56, 43], [3240, -56, 71.4],
+              [3300, -56, 134.4], [3360, -56, 151.1], [3420, -56, 183], [3480, -56, 245.2],
+              [3540, -56, 259.3], [3600, -56, 294.8], [3660, -56, 355.6], [3720, -56, 367],
+              [3780, -56, 367],
+            ],
+            rows: { cx: 906, top: 265, pitch: 108, width: 110, grow: 27, height: 85, hitFirst: 43, hitPitch: 108 },
+            typeAt: [2850, 3290, 3455, 3636],
+            resultAt: [3120, 3312, 3492, 3690],
+            fadeAt: [3190, 3375, 3555, 3700],
+          },
+          mobile: {
+            pill: { pitch: 56, width: 175, grow: 44 },
+            surfaceShift: -76,
+            copyShift: -50.6,
+            toolbarShift: 39,
+            dotPath: stretchKeys(
+              [
+                [0, 0], [1200, 0.8], [1248, 10.3], [1296, 28.9], [1344, 47], [1392, 55.5], [1440, 56.3],
+                [1488, 63.9], [1536, 81.4], [1584, 100.4], [1632, 110.8], [1680, 112.1], [1728, 117.8],
+                [1776, 134], [1824, 153.6], [1872, 165.9], [1920, 168], [1968, 172], [2016, 186.7],
+                [2064, 206.5], [2112, 220.6], [2160, 224],
+              ],
+              MOBILE_STRETCH,
+            ),
+            providerSplit: [60, 117],
+            toolDot: stretchKeys(
+              [
+                [0, 68.5, -36], [2736, 68.5, -36], [2784, 27.4, -34.7], [2832, 17.8, 18.4],
+                [2880, -25, 29], [2928, -41.7, 29], [2976, -42, 29], [3024, -42, 38.7],
+                [3072, -42, 73.6], [3120, -42, 98.4], [3168, -42, 101.9], [3216, -42, 127.6],
+                [3264, -42, 162.1], [3312, -42, 171], [3360, -42, 183.6], [3408, -42, 219.5],
+                [3456, -42, 241.2], [3504, -42, 242], [3545, -42, 242],
+              ],
+              MOBILE_STRETCH,
+            ),
+            rows: { cx: 121.5, top: 407.5, pitch: 71, width: 73, grow: 22, height: 58, hitFirst: 29, hitPitch: 71 },
+            typeAt: [2900, 3310, 3480, 3665],
+            resultAt: [3190, 3385, 3540, 3700],
+            fadeAt: [3260, 3430, 3590, 3760],
+          },
+        };
+
+        /* 4 · DOM SETUP ------------------------------------------------------- */
+        const $ = (ref) => document.querySelector(`[data-ref="${ref}"]`);
+        const $$ = (selector) => [...document.querySelectorAll(selector)];
+        const make = (tag, className, text) => {
+          const el = document.createElement(tag);
+          if (className) el.className = className;
+          if (text) el.textContent = text;
+          return el;
+        };
+
+        const el = {
+          story: $("story"),
+          intro: $("intro"),
+          introCopy: $("intro-copy"),
+          clock: $("clock"),
+          models: $("models"),
+          modelsCopy: $("models-copy"),
+          art: $("art"),
+          modelDot: $("model-dot"),
+          provider: $("provider"),
+          tools: $("tools"),
+          toolDot: $("tool-dot"),
+          command: $("command"),
+          pager: $("pager"),
+          parallax: $$("[data-parallax]"),
+          followSurface: $$('[data-follow="surface"]'),
+          followToolbar: $$('[data-follow="toolbar"]'),
+        };
+        const pagerLinks = [...el.pager.children];
+
+        const pills = MODELS.map((name) => $("stack").appendChild(make("div", "pill", name)));
+        const rowsHost = $("device-rows");
+        const deviceRows = DEVICES.map(({ icon }) => {
+          const row = rowsHost.appendChild(make("div", "device-row"));
+          row.innerHTML = `<svg viewBox="0 0 24 24">${icon}</svg>`;
+          return row;
+        });
+        const results = DEVICES.map(() => rowsHost.appendChild(make("code", "mono mono--result")));
+
+        /* 5 · SCENE RENDERERS (each is a pure function of `y`) ---------------- */
+        const translateY = (els, px) => {
+          [].concat(els).forEach((node) => (node.style.transform = `translateY(${px}px)`));
+        };
+
+        function renderBackground(y) {
+          translateY(el.parallax, -Math.min(y, TRACK) * GRID_PARALLAX);
+        }
+
+        function renderIntro(y, L) {
+          const lift = smootherstep(y / BEATS.introLift);
+          const toolbarLift = smootherstep((y - BEATS.toolbarLift[0]) / BEATS.toolbarLift[1]);
+          const surfaceY = L.surfaceShift * lift;
+          const toolbarY = surfaceY + L.toolbarShift * toolbarLift;
+
+          translateY(el.introCopy, L.copyShift * lift);
+          translateY(el.followSurface, surfaceY);
+          translateY(el.followToolbar, toolbarY);
+          el.clock.style.opacity = 1 - toolbarLift;
+          el.clock.style.transform = `translateY(${-40 * toolbarLift}px)`;
+
+          const opacity = 1 - smoothstep(...BEATS.introFade, y);
+          el.intro.style.opacity = opacity;
+          el.intro.style.visibility = opacity > 0 ? "visible" : "hidden";
+        }
+
+        let activeProvider = -1;
+        function showProvider(index) {
+          if (index === activeProvider) return;
+          activeProvider = index;
+          el.provider.replaceChildren(
+            ...[...PROVIDERS[index]].map((char, i) => {
+              const span = make("span", "", char);
+              span.style.animationDelay = `${i * 40}ms`;
+              return span;
+            }),
+          );
+        }
+
+        function renderModels(y, L) {
+          const visible = smoothstep(...BEATS.modelsIn, y) * (1 - smoothstep(...BEATS.modelsOut, y));
+          const enter = 1 - smootherstep((y - BEATS.modelsDrift) / BEATS.modelsDriftSpan);
+          const exit = smootherstep((y - BEATS.modelsOut[0]) / BEATS.modelsDriftSpan);
+
+          el.models.style.opacity = visible;
+          el.models.style.visibility = visible > 0 ? "visible" : "hidden";
+          translateY(el.modelsCopy, 100 * enter - 75 * exit);
+          translateY(el.art, 180 * enter - 120 * exit);
+
+          const dotY = sample(L.dotPath, y);
+          translateY(el.modelDot, dotY);
+
+          const { pitch, width, grow } = L.pill;
+          pills.forEach((pill, i) => {
+            const near = Math.max(0, 1 - Math.abs(dotY - i * pitch) / pitch);
+            pill.style.width = `${width + grow * near}px`;
+            pill.style.setProperty("--q", near);
+          });
+
+          const [first, second] = L.providerSplit;
+          showProvider(dotY < first ? 0 : dotY < second ? 1 : 2);
+        }
+
+        let typedCommand = -2;
+        let typedChars = [];
+        function renderTerminal(y, L) {
+          let active = -1;
+          L.typeAt.forEach((start, i) => {
+            if (y >= start) active = i;
+          });
+
+          if (active !== typedCommand) {
+            typedCommand = active;
+            typedChars = active < 0 ? [] : [...`$ ${DEVICES[active].command}`].map((ch) => make("i", "", ch));
+            el.command.replaceChildren(...typedChars);
+          }
+          if (active >= 0) {
+            const shown = Math.floor(clamp((y - L.typeAt[active]) / 90) * typedChars.length);
+            typedChars.forEach((node, i) => {
+              const fade = clamp((y - L.fadeAt[active] - i * 12) / 60);
+              const opacity = i < shown ? 1 - fade : 0;
+              node.style.opacity = i < 2 ? opacity * 0.55 : opacity; // dim the "$ " prompt
+            });
+          }
+
+          results.forEach((node, i) => {
+            const text = DEVICES[i].result;
+            node.textContent =
+              y >= L.resultAt[i] ? text.slice(0, Math.floor(clamp((y - L.resultAt[i]) / 50) * text.length)) : "";
+          });
+        }
+
+        function renderTools(y, L) {
+          const reveal = smoothstep(...BEATS.toolsReveal, y);
+          const inset = (1 - reveal) * 100;
+          const radius = 80 * (1 - reveal);
+          el.tools.style.clipPath = `inset(${inset}% 0 0 0 round ${radius}px ${radius}px 0 0)`;
+
+          const dotX = sample(L.toolDot, y, 1);
+          const dotY = sample(L.toolDot, y, 2);
+          el.toolDot.style.transform = `translate(${dotX}px,${dotY}px)`;
+
+          const r = L.rows;
+          deviceRows.forEach((row, i) => {
+            const near = Math.max(0, 1 - Math.abs(dotY - (r.hitFirst + i * r.hitPitch)) / r.hitPitch);
+            const width = r.width + r.grow * near;
+            row.style.width = `${width}px`;
+            row.style.left = `${r.cx - width / 2}px`;
+            row.style.top = `${r.top + i * r.pitch}px`;
+            row.style.setProperty("--q", near);
+          });
+          results.forEach((node, i) => {
+            node.style.top = `${r.top + i * r.pitch + r.height / 2 - RESULT_BASELINE}px`;
+          });
+
+          renderTerminal(y, L);
+          return reveal;
+        }
+
+        function renderPager(y, reveal) {
+          const current = y < BEATS.pagerModels ? 0 : y < BEATS.pagerTools ? 1 : 2;
+          pagerLinks.forEach((link, i) => link.classList.toggle("on", i === current));
+          el.pager.classList.toggle("is-light", reveal > 0.6);
+          el.pager.classList.toggle("is-flat", reveal > 0.5);
+        }
+
+        /* 6 · RENDER ---------------------------------------------------------- */
+        const isMobile = () => innerWidth <= BREAKPOINT;
+        const scrollLength = () => el.story.offsetHeight - innerHeight;
+
+        function render() {
+          const mobile = isMobile();
+          const L = LAYOUTS[mobile ? "mobile" : "desktop"];
+          const y = Math.min((scrollY * TRACK) / Math.max(1, scrollLength()), Y_MAX);
+
+          renderBackground(y);
+          renderIntro(y, L);
+          renderModels(y, L);
+          renderPager(y, renderTools(y, L));
+        }
+
+        /* 7 · SCROLL CONTROLLER ----------------------------------------------- */
+        let frameQueued = false;
+        const scheduleRender = () => {
+          if (frameQueued) return;
+          frameQueued = true;
+          requestAnimationFrame(() => {
+            frameQueued = false;
+            render();
+          });
+        };
+
+        pagerLinks.forEach((link, i) =>
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            scrollTo({ top: (BEATS.pagerTargets[i] * scrollLength()) / TRACK, behavior: "smooth" });
+          }),
+        );
+        addEventListener("scroll", scheduleRender, { passive: true });
+        addEventListener("resize", render);
+        render();
+      })();
+    </script>
+  </body>
+</html>
