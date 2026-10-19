@@ -70,10 +70,11 @@ ${trailLines}
     ];
 
     // Dispatch alert to Admin Telegram
-    await sendTelegramNotification(telegramHtml, keyboard);
+    const tgResult = await sendTelegramNotification(telegramHtml, keyboard);
 
     return res.status(200).json({
       accepted: true,
+      telegram: tgResult,
       id: crashId,
       message: 'Crash report received and dispatched to engineering.'
     });
