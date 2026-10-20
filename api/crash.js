@@ -64,8 +64,8 @@ ${trailLines}
 
     const keyboard = [
       [
-        { text: '🛠 Open GitHub Issues', url: 'https://github.com/fifikoridek2-boop/Avro/issues' },
-        { text: '📂 GitHub Repository', url: 'https://github.com/fifikoridek2-boop/Avro' }
+        { text: '🛠 Open GitHub Issues', url: 'https://github.com/Aymendjmax/Avro-ai/issues' },
+        { text: '📂 GitHub Repository', url: 'https://github.com/Aymendjmax/Avro-ai' }
       ]
     ];
 

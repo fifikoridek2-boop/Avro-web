@@ -60,7 +60,7 @@ export default async function handler(req, res) {
     const keyboard = [
       [
         { text: '🌐 Avro Web Portal', url: 'https://avro-app.vercel.app' },
-        { text: '📂 GitHub Repository', url: 'https://github.com/fifikoridek2-boop/Avro' }
+        { text: '📂 GitHub Repository', url: 'https://github.com/Aymendjmax/Avro-ai' }
       ]
     ];
 
