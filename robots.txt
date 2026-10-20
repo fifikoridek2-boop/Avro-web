@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avro-app.vercel.app/sitemap.xml
