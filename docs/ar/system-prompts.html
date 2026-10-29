@@ -713,6 +713,65 @@
       let currentLang = "ar";
       let currentDoc = "system-prompts";
 
+      
+      const ALL_DOC_IDS = new Set(["getting-started","about","faq","privacy","provider","models","local-model","system-prompts","generation","context","tools","mcp","skills","sandbox","shell","automation","search","web-search","embedding","memory","image-generation","transcription","pdf-import","import-export","conversations","appearance","language","title-generation","proxy","index"]);
+
+      function fixContentLinks(container) {
+        if (!container) return;
+        container.querySelectorAll("a[href]").forEach(a => {
+          const raw = a.getAttribute("href");
+          if (!raw) return;
+          if (raw.startsWith("http://") || raw.startsWith("https://") || raw.startsWith("//") || raw.startsWith("mailto:") || raw.startsWith("#") || raw.startsWith("data:")) return;
+          const m = raw.match(/^([a-zA-Z0-9_-]+)(?:\.(?:md|html))?(#.*)?$/);
+          if (m && ALL_DOC_IDS.has(m[1])) {
+            a.setAttribute("href", "/docs/" + currentLang + "/" + m[1] + (m[2] || ""));
+          }
+        });
+      }
+
+      document.addEventListener("click", (e) => {
+        const a = e.target.closest("a");
+        if (!a) return;
+        const href = a.getAttribute("href");
+        if (!href) return;
+        if (href.startsWith("http://") || href.startsWith("https://") || href.startsWith("//") || href.startsWith("mailto:") || href.startsWith("#") || href.startsWith("data:")) return;
+
+        const docMatch = href.match(/^\/docs\/([a-zA-Z-]+)\/([a-zA-Z0-9_-]+)(#.*)?$/);
+        if (docMatch && ALL_DOC_IDS.has(docMatch[2])) {
+          e.preventDefault();
+          const targetLang = docMatch[1];
+          const targetDoc = docMatch[2];
+          const hash = docMatch[3] || "";
+          if (targetLang !== currentLang) {
+            currentLang = targetLang;
+            updateDirection();
+            renderNav();
+      fixContentLinks(document.getElementById("docBody"));
+          }
+          loadDoc(targetDoc).then(() => {
+            if (hash) {
+              const el = document.querySelector(hash);
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }
+          });
+          return;
+        }
+
+        const relMatch = href.match(/^([a-zA-Z0-9_-]+)(?:\.(?:md|html))?(#.*)?$/);
+        if (relMatch && ALL_DOC_IDS.has(relMatch[1])) {
+          e.preventDefault();
+          const targetDoc = relMatch[1];
+          const hash = relMatch[2] || "";
+          loadDoc(targetDoc).then(() => {
+            if (hash) {
+              const el = document.querySelector(hash);
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }
+          });
+          return;
+        }
+      });
+
       function parseRoute() {
         const path = window.location.pathname.replace(/^\/docs\/?/, "");
         const parts = path.split("/").filter(Boolean);
@@ -800,6 +859,7 @@
           document.querySelectorAll("pre code").forEach(el => {
             hljs.highlightElement(el);
           });
+          fixContentLinks(docBody);
           window.scrollTo({ top: 0, behavior: "smooth" });
         } catch (err) {
           docBody.innerHTML = '<div style="padding: 40px 0; text-align: center; color: var(--muted);">' +
@@ -869,6 +929,7 @@
         parseRoute();
         updateDirection();
         renderNav();
+      fixContentLinks(document.getElementById("docBody"));
         loadDoc(currentDoc);
       });
 

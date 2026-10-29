@@ -14,4 +14,4 @@ The selected transcription model uses the API key and base URL of its configured
 
 Provider limits, image size, and batch size affect latency and reliability; there is no universal accuracy guarantee for a smaller batch.
 
-See [Models](models.md) and [Privacy & Security](privacy.md).
+See [Models](/docs/en/models) and [Privacy & Security](/docs/en/privacy).

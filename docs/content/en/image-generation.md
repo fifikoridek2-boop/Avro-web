@@ -14,4 +14,4 @@ The default size is `1024x1024`. Available sizes and accepted options depend on 
 
 ## Data flow
 
-The prompt and relevant request parameters are sent to the selected provider, and generated media is saved with the conversation/tool output on the device. See [Privacy & Security](privacy.md).
+The prompt and relevant request parameters are sent to the selected provider, and generated media is saved with the conversation/tool output on the device. See [Privacy & Security](/docs/en/privacy).

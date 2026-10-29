@@ -33,4 +33,4 @@
 
 WorkManager 可按所选目录、周期、类别和保留策略建立定期备份。Android 後台调度为尽力执行；电池策略和儲存访问可能影响实际时机。
 
-详见[隐私与安全](privacy.md)。
+详见[隐私与安全](/docs/zh-Hant/privacy)。

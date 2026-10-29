@@ -4,25 +4,25 @@ Avro 是 Android BYOK 客户端，支持远程提供商和设备端语言模型�
 
 ## 开始使用
 
-- [快速开始](getting-started.md)
-- [提供商](provider.md)与[模型](models.md)
-- [对话](conversations.md)
-- [上下文与 Compact](context.md)
-- [隐私与安全](privacy.md)
+- [快速开始](/docs/zh/getting-started)
+- [提供商](/docs/zh/provider)与[模型](/docs/zh/models)
+- [对话](/docs/zh/conversations)
+- [上下文与 Compact](/docs/zh/context)
+- [隐私与安全](/docs/zh/privacy)
 
 ## 生成与提示
 
-- [生成参数](generation.md)
-- [标题生成](title-generation.md)
-- [图像转录](transcription.md)
-- [图像生成](image-generation.md)
-- [系统提示词](system-prompts.md)
+- [生成参数](/docs/zh/generation)
+- [标题生成](/docs/zh/title-generation)
+- [图像转录](/docs/zh/transcription)
+- [图像生成](/docs/zh/image-generation)
+- [系统提示词](/docs/zh/system-prompts)
 
 ## 扩展与数据
 
-- [代理工具](tools.md)、[MCP](mcp.md)、[自动化](automation.md)
-- [网络搜索](web-search.md)、[远程 Shell](shell.md)、[沙盒](sandbox.md)
-- [对话搜索](search.md)、[嵌入 / RAG](embedding.md)、[记忆](memory.md)、[技能](skills.md)
-- [本地模型](local-model.md)、[PDF 导入](pdf-import.md)、[导入与导出](import-export.md)
+- [代理工具](/docs/zh/tools)、[MCP](/docs/zh/mcp)、[自动化](/docs/zh/automation)
+- [网络搜索](/docs/zh/web-search)、[远程 Shell](/docs/zh/shell)、[沙盒](/docs/zh/sandbox)
+- [对话搜索](/docs/zh/search)、[嵌入 / RAG](/docs/zh/embedding)、[记忆](/docs/zh/memory)、[技能](/docs/zh/skills)
+- [本地模型](/docs/zh/local-model)、[PDF 导入](/docs/zh/pdf-import)、[导入与导出](/docs/zh/import-export)
 
-使用[外观](appearance.md)、[语言](language.md)和[网络代理](proxy.md)调整设备级行为。
+使用[外观](/docs/zh/appearance)、[语言](/docs/zh/language)和[网络代理](/docs/zh/proxy)调整设备级行为。

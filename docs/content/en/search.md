@@ -37,4 +37,4 @@ Configure:
 - 5–30 returned results;
 - a similarity threshold from 0–1 (default 0.5).
 
-See [Embedding / RAG](embedding.md), [Memory & Cache](memory.md), and [Privacy & Security](privacy.md).
+See [Embedding / RAG](/docs/en/embedding), [Memory & Cache](/docs/en/memory), and [Privacy & Security](/docs/en/privacy).

@@ -21,4 +21,4 @@ Web search, active memory, saved memory, past-conversation access, and the globa
 
 Tool calls and results become part of the conversation protocol and can be sent to the selected model on subsequent passes. External tools receive the arguments needed for their call. Review each server and permission before enabling it.
 
-Image-generation and embedding credentials come from their selected providers; they are not separate universal tool secrets. See [MCP](mcp.md), [Automation](automation.md), [Shell](shell.md), and [Privacy & Security](privacy.md).
+Image-generation and embedding credentials come from their selected providers; they are not separate universal tool secrets. See [MCP](/docs/en/mcp), [Automation](/docs/en/automation), [Shell](/docs/en/shell), and [Privacy & Security](/docs/en/privacy).

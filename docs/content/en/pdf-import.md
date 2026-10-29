@@ -10,4 +10,4 @@ Avro initially selects the first five pages. It renders the document asynchronou
 
 Selected page images become attachments in the conversation and are sent according to the selected model provider's image-input protocol. Use only documents you are willing to send to that provider.
 
-If a model cannot accept image input, choose a compatible model or transcribe the content by another method. See [Image Transcription](transcription.md) and [Privacy & Security](privacy.md).
+If a model cannot accept image input, choose a compatible model or transcribe the content by another method. See [Image Transcription](/docs/en/transcription) and [Privacy & Security](/docs/en/privacy).

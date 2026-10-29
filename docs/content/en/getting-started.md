@@ -14,7 +14,7 @@ Install from F-Droid, Google Play, or a GitHub release. Features can differ by d
 4. Return to a conversation and select a model in the bottom bar.
 5. Send a message.
 
-Requests go directly to the endpoint configured for the selected provider. Review [Providers](provider.md), [Models](models.md), and [Privacy & Security](privacy.md).
+Requests go directly to the endpoint configured for the selected provider. Review [Providers](/docs/en/provider), [Models](/docs/en/models), and [Privacy & Security](/docs/en/privacy).
 
 ## Build from source
 
@@ -22,7 +22,7 @@ The current project targets Android SDK 36 and uses the repository build workflo
 
 ## Optional setup
 
-- Configure context and Compact under [Context](context.md).
-- Enable external tools under [Agentic Tools](tools.md).
-- Import a GGUF model under [Local Models](local-model.md).
-- Configure language and appearance under [Appearance](appearance.md) and [Language](language.md).
+- Configure context and Compact under [Context](/docs/en/context).
+- Enable external tools under [Agentic Tools](/docs/en/tools).
+- Import a GGUF model under [Local Models](/docs/en/local-model).
+- Configure language and appearance under [Appearance](/docs/en/appearance) and [Language](/docs/en/language).

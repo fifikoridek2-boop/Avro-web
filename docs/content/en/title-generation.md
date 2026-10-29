@@ -9,4 +9,4 @@ Open **Settings → Title Generation** to control automatic conversation titles.
 
 Title requests are sent to the selected model provider and can include conversation content needed for the title. A manually renamed title is controlled through the conversation UI.
 
-See [Conversations](conversations.md) and [Privacy & Security](privacy.md).
+See [Conversations](/docs/en/conversations) and [Privacy & Security](/docs/en/privacy).

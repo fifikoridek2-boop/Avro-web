@@ -32,4 +32,4 @@ API Key 保存在偏好设置而非 Room 对话数据库中。`SecretCrypto` 通
 
 在“高级”中使用**模型空闲保留**设置未使用的本地模型在卸载前继续驻留内存的时间。删除本地条目会删除由应用持有的模型与投影文件副本；编辑时替换或移除投影文件，会清理旧的投影文件副本。
 
-导出时可选择包含提供商机密，但这些值在归档内部未加密。详见[模型](models.md)、[本地模型](local-model.md)、[导入与导出](import-export.md)和[隐私与安全](privacy.md)。
+导出时可选择包含提供商机密，但这些值在归档内部未加密。详见[模型](/docs/zh/models)、[本地模型](/docs/zh/local-model)、[导入与导出](/docs/zh/import-export)和[隐私与安全](/docs/zh/privacy)。

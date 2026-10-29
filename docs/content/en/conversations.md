@@ -10,11 +10,11 @@ Use the conversation drawer to create, rename, search, pin, archive, or delete c
 
 The bottom bar selects the model and shows estimated context occupancy. During a normal generation—including Compact—the send control follows the same generation state: it becomes **Stop** when no draft or attachment is waiting, and remains **Send** when content can be queued. Queued content is sent automatically after the active generation finishes.
 
-Long conversations use the budget and Compact behavior configured in **Settings → Context**. See [Context](context.md).
+Long conversations use the budget and Compact behavior configured in **Settings → Context**. See [Context](/docs/en/context).
 
 ## Titles and prompts
 
-Conversation titles can be generated automatically using [Title Generation](title-generation.md). A conversation may inherit the default [System Prompt](system-prompts.md) or select another one.
+Conversation titles can be generated automatically using [Title Generation](/docs/en/title-generation). A conversation may inherit the default [System Prompt](/docs/en/system-prompts) or select another one.
 
 ## Attachments
 

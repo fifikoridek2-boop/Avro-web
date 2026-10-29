@@ -33,4 +33,4 @@ These imports use a non-cancelable percentage-based linear progress dialog. Clau
 
 WorkManager can create periodic backups with a selected destination, schedule, category set, and retention policy. Android background scheduling is best-effort; battery policy and storage access can affect timing.
 
-See [Privacy & Security](privacy.md).
+See [Privacy & Security](/docs/en/privacy).

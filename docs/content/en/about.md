@@ -12,7 +12,7 @@ The rating form sends only the fields you deliberately submit—rating, name, em
 
 After an unexpected crash, Avro stores one pending report locally and, on the next launch, asks whether you want to send it. Nothing is uploaded without that explicit action. The report contains the stack trace, app/Android version, device manufacturer/model, timestamp, and bounded diagnostic event tags; it does not include conversation text, credentials, or device identifiers.
 
-For data handling and network destinations, see [Privacy & Security](privacy.md).
+For data handling and network destinations, see [Privacy & Security](/docs/en/privacy).
 
 ## License
 

@@ -32,4 +32,4 @@ The **Local** provider imports chat models from GGUF files. Each entry has a mod
 
 Use **Model Idle Retention** under Advanced to choose how long an unused local model stays loaded before Avro unloads it. Deleting a local entry removes the app-owned model and projector copies. When an edit replaces or removes a projector, Avro removes the old projector copy.
 
-Optional exports can include provider secrets, but those secrets are unencrypted inside the archive. See [Models](models.md), [Local Models](local-model.md), [Import & Export](import-export.md), and [Privacy & Security](privacy.md).
+Optional exports can include provider secrets, but those secrets are unencrypted inside the archive. See [Models](/docs/en/models), [Local Models](/docs/en/local-model), [Import & Export](/docs/en/import-export), and [Privacy & Security](/docs/en/privacy).

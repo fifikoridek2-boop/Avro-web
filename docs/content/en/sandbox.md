@@ -16,4 +16,4 @@ A shared-storage mount allows selected Android files to be visible inside the sa
 
 PRoot is process/filesystem isolation, not a hardware virtual machine. It does not grant Android root, but commands run with the app's granted access. VPN, private DNS, captive portals, or Android background policy can affect downloads and sandbox networking.
 
-See [Agentic Tools](tools.md) and [Privacy & Security](privacy.md).
+See [Agentic Tools](/docs/en/tools) and [Privacy & Security](/docs/en/privacy).

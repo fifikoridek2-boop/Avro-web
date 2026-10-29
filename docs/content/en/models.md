@@ -22,7 +22,7 @@ During synchronization, the row crossfades over 250 ms to **Syncing...** with a 
 
 Fetched models are grouped by provider and can be searched by provider, raw model ID, stored alias, or inferred alias. The row presents the friendly name separately from its provider/API identity. Use the checkbox to make a model available, and open its alias action to rename the display label.
 
-Disabling any model removes it from selection. Deleting a manually added model removes that local configuration entry; neither action deletes remote provider data. Imported chat GGUF files are managed under the Local provider in [Providers](provider.md).
+Disabling any model removes it from selection. Deleting a manually added model removes that local configuration entry; neither action deletes remote provider data. Imported chat GGUF files are managed under the Local provider in [Providers](/docs/en/provider).
 
 ## Provider Name in Model Labels
 
@@ -30,4 +30,4 @@ The Rename dialog and custom model editor include **Show Provider name** below t
 
 Click **Save** to save both the alias and the switch. Cancel, Back, or dismissing the dialog discards both edits. New models show the provider by default. On upgrade, Avro initializes the switch once to preserve each existing model's previous presentation. The choice is included in settings backups.
 
-See [Providers](provider.md) and [Generation](generation.md).
+See [Providers](/docs/en/provider) and [Generation](/docs/en/generation).

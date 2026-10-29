@@ -14,4 +14,4 @@ Model-specific context and generation capability depend on the GGUF and availabl
 
 Deleting an imported local model removes Avro's managed GGUF and associated projection file. It does not delete an unrelated source file outside Avro's managed storage.
 
-Review [Models](models.md), [Generation](generation.md), and [Privacy & Security](privacy.md). The separate Alpine sandbox is F-Droid-only, but it is not required for llama.cpp model inference.
+Review [Models](/docs/en/models), [Generation](/docs/en/generation), and [Privacy & Security](/docs/en/privacy). The separate Alpine sandbox is F-Droid-only, but it is not required for llama.cpp model inference.

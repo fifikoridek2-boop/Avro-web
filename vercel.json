@@ -12,6 +12,22 @@
       "destination": "/docs/content/:path*"
     },
     {
+      "source": "/docs/:lang/:subpage/:page\\.md",
+      "destination": "/docs/:lang/:page/index.html"
+    },
+    {
+      "source": "/docs/:lang/:subpage/:page\\.html",
+      "destination": "/docs/:lang/:page/index.html"
+    },
+    {
+      "source": "/docs/:lang/:page\\.md",
+      "destination": "/docs/:lang/:page/index.html"
+    },
+    {
+      "source": "/docs/:lang/:page\\.html",
+      "destination": "/docs/:lang/:page/index.html"
+    },
+    {
       "source": "/docs/:lang/:page",
       "destination": "/docs/:lang/:page/index.html"
     },
@@ -41,6 +57,24 @@
     }
   ],
   "headers": [
+    {
+      "source": "/docs/content/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/docs/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
     {
       "source": "/api/(.*)",
       "headers": [

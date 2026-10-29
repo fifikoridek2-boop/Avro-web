@@ -9,4 +9,4 @@ Access to active memory and saved memories is enabled by default and can be cont
 
 Memory data is stored locally until you delete it or include it in a request. When an enabled model/tool uses memory, the relevant content can be sent to that model provider. Clearing a cache is different from deleting saved memory; review the confirmation text before acting.
 
-See [Conversation Search](search.md), [Agentic Tools](tools.md), and [Privacy & Security](privacy.md).
+See [Conversation Search](/docs/en/search), [Agentic Tools](/docs/en/tools), and [Privacy & Security](/docs/en/privacy).

@@ -4,37 +4,37 @@ Avro is an Android BYOK client for provider-hosted and on-device language models
 
 ## Start here
 
-- [Getting Started](getting-started.md)
-- [Providers](provider.md) and [Models](models.md)
-- [Conversations](conversations.md)
-- [Context and Compact](context.md)
-- [Privacy & Security](privacy.md)
+- [Getting Started](/docs/en/getting-started)
+- [Providers](/docs/en/provider) and [Models](/docs/en/models)
+- [Conversations](/docs/en/conversations)
+- [Context and Compact](/docs/en/context)
+- [Privacy & Security](/docs/en/privacy)
 
 ## Configure generation
 
-- [Generation Parameters](generation.md)
-- [Title Generation](title-generation.md)
-- [Image Transcription](transcription.md)
-- [Image Generation](image-generation.md)
-- [System Prompts](system-prompts.md)
+- [Generation Parameters](/docs/en/generation)
+- [Title Generation](/docs/en/title-generation)
+- [Image Transcription](/docs/en/transcription)
+- [Image Generation](/docs/en/image-generation)
+- [System Prompts](/docs/en/system-prompts)
 
 ## Extend Avro
 
-- [Agentic Tools](tools.md)
-- [MCP Servers](mcp.md)
-- [Automation](automation.md)
-- [Web Search](web-search.md)
-- [Remote Shell / Conch](shell.md)
-- [Sandbox](sandbox.md)
+- [Agentic Tools](/docs/en/tools)
+- [MCP Servers](/docs/en/mcp)
+- [Automation](/docs/en/automation)
+- [Web Search](/docs/en/web-search)
+- [Remote Shell / Conch](/docs/en/shell)
+- [Sandbox](/docs/en/sandbox)
 
 ## Knowledge and data
 
-- [Conversation Search](search.md)
-- [Embedding / RAG](embedding.md)
-- [Memory & Cache](memory.md)
-- [Skills](skills.md)
-- [Local Models](local-model.md)
-- [PDF Import](pdf-import.md)
-- [Import & Export](import-export.md)
+- [Conversation Search](/docs/en/search)
+- [Embedding / RAG](/docs/en/embedding)
+- [Memory & Cache](/docs/en/memory)
+- [Skills](/docs/en/skills)
+- [Local Models](/docs/en/local-model)
+- [PDF Import](/docs/en/pdf-import)
+- [Import & Export](/docs/en/import-export)
 
-Use [Appearance](appearance.md), [Language](language.md), and [Network Proxy](proxy.md) for device-level behavior. The documentation site falls back to the maintained English page when a translation is unavailable.
+Use [Appearance](/docs/en/appearance), [Language](/docs/en/language), and [Network Proxy](/docs/en/proxy) for device-level behavior. The documentation site falls back to the maintained English page when a translation is unavailable.

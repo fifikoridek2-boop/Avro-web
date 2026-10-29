@@ -20,4 +20,4 @@ Avro 只会按所选提供商协议发送受支援的參數。
 
 兼容端点可选 **Off、Auto、Default、Flex、Fast**。是否可用、延迟与计费由提供商决定。
 
-上下文与 Compact 请在[上下文](context.md)中設定。
+上下文与 Compact 请在[上下文](/docs/zh-Hant/context)中設定。

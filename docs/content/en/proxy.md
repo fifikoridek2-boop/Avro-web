@@ -16,4 +16,4 @@ The destination may still see traffic metadata, and the proxy operator can obser
 
 Configure the proxy type, host, port, optional username/password, and bypass rules accepted by the UI. Test the route before relying on it. A proxy password is included in an Avro export only if the secrets/API-key category is explicitly selected.
 
-See [Privacy & Security](privacy.md).
+See [Privacy & Security](/docs/en/privacy).

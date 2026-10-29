@@ -2,7 +2,7 @@
 
 ## Does Avro operate a chat relay?
 
-No. Conversations are stored locally and chat requests go from the device to the provider or endpoint you configure. Avro does make other optional/direct network requests—for example update checks, explicitly submitted ratings or crash reports, web search, MCP, embeddings, image services, and remote shell. See [Privacy & Security](privacy.md).
+No. Conversations are stored locally and chat requests go from the device to the provider or endpoint you configure. Avro does make other optional/direct network requests—for example update checks, explicitly submitted ratings or crash reports, web search, MCP, embeddings, image services, and remote shell. See [Privacy & Security](/docs/en/privacy).
 
 ## Where are API keys stored?
 
@@ -18,11 +18,11 @@ Open **Settings → Models**, sync providers, and enable the model. Custom model
 
 ## How does Compact affect my history?
 
-Compact adds a visible summary boundary without deleting original messages. It is a standard generation: sending during it queues the message, and deleting the capsule restores the preceding boundary while preserving conversation content. See [Context](context.md).
+Compact adds a visible summary boundary without deleting original messages. It is a standard generation: sending during it queues the message, and deleting the capsule restores the preceding boundary while preserving conversation content. See [Context](/docs/en/context).
 
 ## Is Conch always end-to-end encrypted?
 
-Only when the Conch device has an API key. Authenticated Conch requests use its signed key exchange and encrypted request protocol. A blank-key server accepts plain JSON at the application layer, relying only on HTTPS if its URL uses HTTPS. See [Shell Setup](shell.md).
+Only when the Conch device has an API key. Authenticated Conch requests use its signed key exchange and encrypted request protocol. A blank-key server accepts plain JSON at the application layer, relying only on HTTPS if its URL uses HTTPS. See [Shell Setup](/docs/en/shell).
 
 ## Are local models available in every build?
 
@@ -30,4 +30,4 @@ The Alpine sandbox is build-dependent. The F-Droid flavor exposes the sandbox fe
 
 ## How do I back up data?
 
-Use **Settings → Import & Export**. The `.avro` file is a ZIP archive, with selectable categories and optional secrets. See [Import & Export](import-export.md).
+Use **Settings → Import & Export**. The `.avro` file is a ZIP archive, with selectable categories and optional secrets. See [Import & Export](/docs/en/import-export).

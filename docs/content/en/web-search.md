@@ -12,4 +12,4 @@ Web search is enabled by default. The default result count is 5 and can be set f
 
 Queries are sent directly to the selected search provider. Returned snippets and links can be stored in the conversation as tool data and sent to the chat model during the agentic loop. Provider policies, quotas, and availability are external to Avro and can change.
 
-See [Agentic Tools](tools.md) and [Privacy & Security](privacy.md).
+See [Agentic Tools](/docs/en/tools) and [Privacy & Security](/docs/en/privacy).

@@ -14,7 +14,7 @@ Avro 是 Android BYOK 客户端：你需要自行配置模型提供商、凭据�
 4. 回到对话，在底栏选择模型。
 5. 发送消息。
 
-请求会直接发往所选提供商配置的端点。参见[提供商](provider.md)、[模型](models.md)和[隐私与安全](privacy.md)。
+请求会直接发往所选提供商配置的端点。参见[提供商](/docs/zh/provider)、[模型](/docs/zh/models)和[隐私与安全](/docs/zh/privacy)。
 
 ## 从源码构建
 

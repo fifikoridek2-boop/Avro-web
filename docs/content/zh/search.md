@@ -37,4 +37,4 @@
 - 5–30 条返回结果；
 - 0–1 的相似度阈值，默认 0.5。
 
-详见[嵌入 / RAG](embedding.md)、[记忆与缓存](memory.md)和[隐私与安全](privacy.md)。
+详见[嵌入 / RAG](/docs/zh/embedding)、[记忆与缓存](/docs/zh/memory)和[隐私与安全](/docs/zh/privacy)。

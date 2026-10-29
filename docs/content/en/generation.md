@@ -22,4 +22,4 @@ For compatible endpoints, the service tier can be **Off**, **Auto**, **Default**
 
 ## Related settings
 
-Context budgeting and Compact are configured separately under [Context](context.md). Automatic titles use [Title Generation](title-generation.md), and image-specific defaults use [Image Generation](image-generation.md).
+Context budgeting and Compact are configured separately under [Context](/docs/en/context). Automatic titles use [Title Generation](/docs/en/title-generation), and image-specific defaults use [Image Generation](/docs/en/image-generation).

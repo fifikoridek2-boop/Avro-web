@@ -21,4 +21,4 @@ Remote embeddings use the credentials and base URL configured for the selected p
 - Result count: 5–30, in steps of 5
 - Similarity threshold: 0–1 (default 0.5)
 
-Changing the embedding model may require existing indexed content to be embedded again before results are complete. See [Conversation Search](search.md) and [Privacy & Security](privacy.md).
+Changing the embedding model may require existing indexed content to be embedded again before results are complete. See [Conversation Search](/docs/en/search) and [Privacy & Security](/docs/en/privacy).
